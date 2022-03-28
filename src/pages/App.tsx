@@ -3,8 +3,10 @@ import {css, Theme} from "@emotion/react";
 // App
 
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "./store";
-import { plusAction, minusAction, changeNameAction } from "./store/demo/action";
+import { RootState } from "../store";
+import { plusAction, minusAction, changeNameAction } from "../store/demo/action";
+
+import Footer from "../components/templates/footer";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -29,7 +31,8 @@ export default function App() {
   };
 
   return (
-    <div css={Style.Container}>
+    <>
+          <div css={Style.Container}>
       <div>
         <p>이름 : {name}</p>
         <input
@@ -46,6 +49,9 @@ export default function App() {
         <button onClick={onMinus}>MINUS</button>
       </div>
     </div>
+    <Footer></Footer>
+    </>
+
   );
 }
 
