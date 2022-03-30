@@ -1,8 +1,8 @@
 // store/rootReducer.ts
 import { combineReducers } from "redux";
+// type
+export type RootState = ReturnType<typeof rootReducer>;
 
-import demo from "./demo/reducer";
-
-const rootReducer = combineReducers({ demo });
+const rootReducer = combineReducers({ });
 
 export default rootReducer;

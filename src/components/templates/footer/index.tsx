@@ -24,6 +24,6 @@ const Style ={
         display : flex;
         justify-content: center; 
         height : 100%;
-        background-color : #c9b4b4;
+        background-color : #ffffff;
     `
 }

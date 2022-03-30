@@ -1,12 +1,14 @@
 import React from "react";
 import {css , Theme} from "@emotion/react";
 import Card from "../../card"
+import ProductList from "src/pages/ProductsList";
 export default function Body(){
     
 
     return(
         <div css={Style.Container}>
             <div css={Style.InnerContainer}>
+
                 <Card></Card>
             </div>
         </div>
@@ -26,8 +28,7 @@ const Style ={
         display : flex;
         justify-content: center;
         height : 100%;
-        background-color : #a89e9e;
-        text-align : center;
+        background-color : #ffffff;
         z-index: -1;
     `
 }

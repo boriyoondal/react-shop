@@ -1,12 +1,13 @@
 import React from "react";
-import {css , Theme} from "@emotion/react";
+import {css} from "@emotion/react";
+import ProductList from "src/pages/ProductsList";
 
 export default function Card(){ 
 
     return(
         <div css={Style.Container}>
             <div css={Style.InnerContainer}>
-                Card
+            <ProductList/>
             </div>
         </div>
     )
@@ -15,16 +16,13 @@ export default function Card(){
 
 const Style ={
     Container : css`
-
+    width : 100%; 
     `,
     InnerContainer : css`
         max-width: 1024px;
         margin : 0 auto;
         display : flex;
-        justify-content: center;
-        border : 1px solid black;
-        width : 100px;
-        height : 100px;
         margin : 2rem 2rem;
+        float : left;
     `
 }
