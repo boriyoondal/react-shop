@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {css , Theme} from "@emotion/react";
-import Sidebar from "src/components/templates/sidebar";
+import Sidebar from "../sidebar";
 import SidebarContent from "../sidebar/sidebar-content";
 
 export default function Header(){
@@ -17,7 +17,7 @@ export default function Header(){
                     setToggle((prevState) => !prevState);
                 }}>CHange</button> */}
             </div>           
-        <Sidebar width={300} height={700}>
+        <Sidebar width={320}>
             <SidebarContent/>
         </Sidebar>
         </div> 

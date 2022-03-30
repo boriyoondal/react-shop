@@ -4,8 +4,11 @@ export const UPDATE_CART_QUANTITY = "UPDATE_CART_QUANTITY" as const; // 수량�
 export const CLEAR_CART = "CLEAR_CART" as const; // 장바구니 초기화
 
 type Item = {
-    item: string,
-    qty : number
+    id : number;
+    item : string;
+    name: string;
+    price: String;
+    qty : number;
 }
 export const addCart = (item:Item) => ({type : ADD_ITEM, payload:{id:item}})
 export const deleteCart = (item:Item) => ({type : DELETE_ITEM, payload:{id:item}})

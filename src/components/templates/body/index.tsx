@@ -1,15 +1,13 @@
 import React from "react";
 import {css , Theme} from "@emotion/react";
-import Card from "../../card"
-import ProductList from "src/pages/ProductsList";
+import ProductList from "../../cart/ProductList";
 export default function Body(){
     
 
     return(
         <div css={Style.Container}>
             <div css={Style.InnerContainer}>
-
-                <Card></Card>
+                <ProductList/>
             </div>
         </div>
     )

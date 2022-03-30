@@ -4,11 +4,10 @@ import { IoCartOutline } from "react-icons/io5"
 
 type SideType = {
     width : number;
-    height : number;
     children : any;
 }
 
-export default function Sidebar({width, height, children} : SideType) {
+export default function Sidebar({width, children} : SideType) {
     const [xPosition, setX] = useState(-width);
 
     
@@ -32,7 +31,6 @@ export default function Sidebar({width, height, children} : SideType) {
         style={{
             transform: `translatex(${xPosition}px)`,
             width: width, 
-            height: height
             }}
             >
 
@@ -44,7 +42,7 @@ export default function Sidebar({width, height, children} : SideType) {
 
             }}
             >
-            <IoCartOutline className="icon" size="36"/>    
+            <IoCartOutline className="icon" size="36" color="#cc9c9c"/>    
             </div>
             <div className="content">{children}</div>
         </div>

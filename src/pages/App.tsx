@@ -29,16 +29,3 @@ export default function App() {
 
   );
 }
-
-const Style = {
-  Container: (theme: Theme) => css`
-     background-color: #ddd;
-
-     ${theme.mobile}{
-       background-color: ${theme.black};
-     }
-  `,
-  Body: css`
-    color: tomato;
-  `,
-}
