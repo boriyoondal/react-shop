@@ -4,8 +4,9 @@ import { RootState } from "src/store";
 import CartItem from "../CartItem";
 
 export default function CartList() {
-    const state = useSelector((store : RootState) => store.reducer);
+    const state = useSelector((store : RootState) => store.cart);
     const dispatch = useDispatch();
+
 
     return(
         <div>

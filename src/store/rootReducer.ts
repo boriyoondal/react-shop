@@ -1,9 +1,7 @@
 // store/rootReducer.ts
 import { combineReducers } from "redux";
-import reducer from "../store/cart/reducer"
-// type
-export type RootState = ReturnType<typeof rootReducer>;
+import cart from "./cart/reducer"
 
-const rootReducer = combineReducers({ reducer });
+const rootReducer = combineReducers({ cart });
 
 export default rootReducer;
