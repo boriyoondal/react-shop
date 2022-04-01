@@ -5,13 +5,17 @@ import { Product } from "src/@types/types";
 import {
     addCart,
     deleteCart,
+    clearCart,
     ADD_ITEM,
     DELETE_ITEM,
+    CLEAR_ITEM,
+
 } from "../cart/action"
 
 type Action =
     |ReturnType<typeof addCart>
     |ReturnType<typeof deleteCart>
+    |ReturnType<typeof clearCart>
 
 interface State {
 
@@ -19,21 +23,21 @@ interface State {
         id: string;
         title: string;
         description: string;
-        price: string;
+        price: number;
         image: string;
     }[] | [];
     cart : any;
     currentItem: any;
 }
 
-//@reducer 
+//@init
 const initialState: State = {
     products : [
         {
             id : "",
             title: "",
             description : "",
-            price : "",
+            price : 0,
             image : ""
         }
     ],
@@ -41,6 +45,7 @@ const initialState: State = {
     currentItem : null,
 };
 
+//@reducer 
 const reducer = (state = initialState, action : Action) => {
     switch (action.type) {
         case ADD_ITEM :
@@ -53,6 +58,11 @@ const reducer = (state = initialState, action : Action) => {
                 ...state,
                 products: [...state.products.filter(product => product.id !== action.productId)]
             };
+        case CLEAR_ITEM : 
+            return {
+                ...state,
+                products : []
+            }
         default :
             return state;
         };      

@@ -1,29 +1,38 @@
 import React,{ useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/store";
-import ProductItem from "src/components/cart/ProductItem";
-import { useParams } from "react-router-dom";
-import API from "src/API";
-import { addCart, ADD_ITEM } from "src/store/cart/action";
+//import API from "src/API";
+import { addCart } from "src/store/cart/action";
 import axios from "axios";
 import { Product } from "src/@types/types";
 import { GoPlus } from "react-icons/go";
 import { css } from "@emotion/react";
+import Pagination from "src/components/pagination";
+import Post from "../Post/post";
 
 export default function ProductList() {
     const store = useSelector((store : RootState) => store.cart);
     const dispatch = useDispatch();
-    
+
+    const [products, setProducts] = useState<Product[]>([]);
+    const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1); // 현재페이지
+    const [postsPerPage, setPostsPerPage] = useState(3); // 페이지 당 product 갯수
+
     // state
-    const [products, setProducts] = useState< {
-        id: string;
-        title: string;
-        description: string;
-        price: string;
-        image: string;
-    }[] | []>([]);
+   
 
     useEffect(() => {
+        
+        // 서버로부터 데이터 가져오기 
+        async function fetchData() {
+        setLoading(true);
+        const res = await axios.get("http://localhost:9999/api");
+        setProducts(res.data);
+        setLoading(false)     
+        }
+        fetchData();
+
         /*
         (async () => {
             const response  = await new Promise((resolve, reject) => {
@@ -45,11 +54,11 @@ export default function ProductList() {
         })
         */
 
-        // 서버로부터 API 받아오기 
-        axios.get("http://localhost:9999/api").then((res) => {
-            console.log(res);
-            setProducts(res.data);
-        })
+        // // 서버로부터 API 받아오기 
+        // axios.get("http://localhost:9999/api").then((res) => {
+        //     console.log(res);
+        //     setProducts(res.data);
+        // })
         
 
         /*
@@ -61,24 +70,34 @@ export default function ProductList() {
 
     }, [])
     
+    const indexOfLast = currentPage * postsPerPage;
+    const indexOfFirst = indexOfLast - postsPerPage;
+    const currentPosts = products.slice(indexOfFirst, indexOfLast)
+
+
     return(
         <div>
             <div>
-            <h2>상품 목록</h2>
+            <h2 style={{textAlign : "center", marginTop:"2rem"}}>SHOES LIST</h2>
 
-            {products.map((v, i) => 
+             {products.map((v, i) => 
             <article key={i} css={Style.ItemBox}>
+                <div className="productBox" css={Style.InnerItemBox}>
                 <img
-                src={v.image} style={{width:200, height:150}}/>
-                <p>아이디: {v.id}</p>
-                <p>상품명: {v.title}</p>
-                <p>설명: {v.description}</p>
+                src={v.image} style={{width:200, height:200}}/>
+                <p>{v.id}</p>
+                <p>{v.title}</p>
+                <p>{v.price}</p>
+                <br/>
                 <button onClick= {()=>dispatch(addCart(v))}> 장바구니 <GoPlus/> </button>
-                
+                </div>
             </article>
-            )}
-               
+            )} 
+           
             </div>
+            
+                
+            <Pagination postsPerPage={postsPerPage} totalPosts={products.length} paginate={setCurrentPage}></Pagination>
         </div>
         
     )
@@ -91,9 +110,11 @@ const Style = {
     margin : 2.2rem;
     float : left;
     text-align: center;
+    
    `,
     
     InnerItemBox : css`
-    margin-left : 4rem;
+    margin: 0 1.2rem;
+    
     `
 }

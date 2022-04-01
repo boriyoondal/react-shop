@@ -1,24 +1,28 @@
-import React from "react";
+import React,{ useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "src/store";
 import {css, Theme} from "@emotion/react";
-import API from "src/API";
 import CartList from "./CartList";
 
-type Item = {
-    id : number;
-    name: string;
-    price: String;
-}
-
 export default function SidebarContent() {
-    
+    const { products }= useSelector((store : RootState) => store.cart);
+
+    const [sum, setSum] = useState('');
+
+
     return(
         <div css={Style.Container}>
         <div css={Style.InnerContainer}>
-            사이드바    
+            CART  
             <div><br/></div>
             <CartList/>
             <br/>
-            <div>합계</div>
+            <div>합계
+                {products.map((v,i) =>
+                <div key={i}>
+                    {v.price}
+                </div>)}
+            </div>
         </div>
         </div>
     )
@@ -37,5 +41,6 @@ const Style = {
     position: relative;
     width: 100%;
     height : 100%;
+    color : white;
     `,
 }

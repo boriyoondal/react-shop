@@ -6,7 +6,7 @@ export default function Footer(){
     return (
     <div css={Style.Container}>
         <div css={Style.InnerContainer}>
-        Footer
+        <p>Copyright 2022 ✔ All right Reserved.</p>
         </div>
     </div>
 
@@ -17,6 +17,7 @@ const Style ={
     Container : css`
         width : 100%;
         height : 100px;
+        text-align: center;
     `,
     InnerContainer : css`
         max-width: 1024px;
@@ -25,5 +26,6 @@ const Style ={
         justify-content: center; 
         height : 100%;
         background-color : #ffffff;
+        
     `
 }

@@ -16,7 +16,7 @@ export default function Body(){
 const Style ={
     Container : css`
         width : 100%;
-        height : 600px;
+        height : 100%;
         margin-top : 2rem;
         z-index: 1;
     `,

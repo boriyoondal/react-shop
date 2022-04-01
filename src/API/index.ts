@@ -2,7 +2,7 @@ export default [
   {
     id : "1",
     title : "clothes",
-    description : "clothes",
+    description : "옷",
     price : "10,000",
     image :  "https://images.unsplash.com/photo-1591991731833-b4807cf7ef94?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
 },

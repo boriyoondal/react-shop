@@ -10,7 +10,7 @@ export default function CartList() {
 
     return(
         <div>
-            장바구니 리스트
+            장바구니 목록
             <CartItem/>
         </div>
         
