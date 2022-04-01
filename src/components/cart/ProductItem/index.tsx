@@ -1,5 +1,5 @@
 import React from "react";
-import { css } from "@emotion/react";
+
 import { GoPlus } from "react-icons/go"
 import { useDispatch, useSelector } from "react-redux";
 import { addCart } from "../../../store/cart/action";
@@ -14,15 +14,3 @@ export default function ProductItem() {
     )
 }
 
-const Style = {
-    ItemBox : css`
-    padding : 1rem;
-    margin : 2.2rem;
-    float : left;
-    text-align: center;
-   `,
-    
-    InnerItemBox : css`
-    margin-left : 4rem;
-    `
-}

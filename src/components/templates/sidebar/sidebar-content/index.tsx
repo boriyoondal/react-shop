@@ -26,9 +26,10 @@ export default function SidebarContent() {
 
 const Style = {
     Container : (theme : Theme) => css`
-    background-color: #cc9c9c;
+    background-color: #000000;
     max-width: 768px;
     height : 100%;
+    color : white;
     `,
 
     InnerContainer : css`
