@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/store";
-//import API from "src/API";
+import API from "src/API";
 import { addCart } from "src/store/cart/action";
 import axios from "axios";
 import { Product } from "src/@types/types";
 import { GoPlus } from "react-icons/go";
 import { css } from "@emotion/react";
 import Pagination from "src/components/pagination";
+
 
 export default function ProductList() {
     //@redux - toggle 구현 예정
@@ -19,7 +20,7 @@ export default function ProductList() {
   //@pagination/state
    const [products, setProducts] = useState<Product[]>([]); // 총 게시물 data
    const [startPage, setStartPage] = useState(0);
-   const [totalPage, setTotalPage] = useState(5);
+   const [totalPage, setTotalPage] = useState(6);
    const [currentPage, setCurrentPage] = useState(1);
 
 //   const pageNumber = [];
@@ -35,17 +36,17 @@ export default function ProductList() {
 //   }, [currentPage,startPage]);
 
   useEffect(() => {
-    // 서버로부터 데이터 가져오기
-    async function fetchData() {
-      setLoading(true);
-      const res = await axios.get("http://localhost:9999/api");
-      setProducts(res.data);
-      setLoading(false);
-      console.log(res.data);
-    }
-    fetchData();
+    // // 서버로부터 데이터 가져오기
+    // async function fetchData() {
+    //   setLoading(true);
+    //   const res = await axios.get("http://localhost:9999/api");
+    //   setProducts(res.data);
+    //   setLoading(false);
+    //   console.log(res.data);
+    // }
+    // fetchData();
 
-    /*
+    
         (async () => {
             const response  = await new Promise((resolve, reject) => {
                 setTimeout(() => {
@@ -54,7 +55,7 @@ export default function ProductList() {
             })
             setProducts(response as any);
         })();
-        */
+        
 
     /*
         new Promise((resolve, reject) => {
@@ -145,7 +146,7 @@ export default function ProductList() {
           </div>
         ))}
       </div> */}
-      <Pagination products= {products}/>
+      <Pagination products={products} setStartPage={setStartPage} setTotalPage={setTotalPage} setCurrentPage={setCurrentPage} currentPage={currentPage} startPage={startPage}/>
     </div>
   );
 }

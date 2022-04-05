@@ -7,13 +7,16 @@ import type { Product } from "src/@types/types";
 
 interface Props {
   products: Product[]
+  setStartPage: any
+  setTotalPage: any
+  setCurrentPage : any
+  currentPage: number
+  startPage: number
 }
 
 export default function Pagination(props: Props) {
-  const {products} = props; 
-  const [startPage, setStartPage] = useState(0);
-  const [totalPage, setTotalPage] = useState(5);
-  const [currentPage, setCurrentPage] = useState(1);
+  const {products, setStartPage, setTotalPage, setCurrentPage, currentPage,startPage} = props; 
+  // console.log(products);
 
   const pageNumber = [];
 
@@ -22,12 +25,11 @@ export default function Pagination(props: Props) {
   }
 
   useEffect(() => {
-
     console.log(products.length,"마운트");
     setStartPage((currentPage - 1) * 6);
     setTotalPage(currentPage * 6);
   }, [currentPage,startPage]);
-
+  
   return (
     <div>
     <div style={{textAlign : "center"}}>
