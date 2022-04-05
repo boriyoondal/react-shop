@@ -1,35 +1,46 @@
 import React,{ useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "src/store";
 
-type pageNum = {
-  totalPage : number,
-  currentPage : number,
-  setCurrentPage : any;
+// type
+import type { Product } from "src/@types/types";
+
+interface Props {
+  products: Product[]
 }
 
-const PAGES_PER_LIST = 3;
+export default function Pagination(props: Props) {
+  const {products} = props; 
+  const [startPage, setStartPage] = useState(0);
+  const [totalPage, setTotalPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
 
-export default function Page({totalPage, currentPage, setCurrentPage} : pageNum) {
-  // const [showingNum, setShowingnum] = useState({
-  //   start : 1,
-  //   end : PAGES_PER_LIST,
-  // });
-  
-  // useEffect(() => {
-  //   const lessThanThree = totalPage <= PAGES_PER_LIST;
-  //   lessThanThree
-  //   ? setShowingnum(prev => ({ ...prev, start: 1, end: totalPage}))
-  //   : setShowingnum(prev => ({...prev, start : 1, end:PAGES_PER_LIST}));
-  // },[totalPage]);
+  const pageNumber = [];
 
-  // useEffect(() => {
-  //   setCurrentPage(showingNum.start);
-  // },[showingNum, setCurrentPage]);
+  for (let i = 1; i <= Math.ceil(products.length / 6); i++) {
+    pageNumber.push(i);
+  }
 
-  // const isFirstPage = showingNum.start === 1;
-  // const isLastPage = showingNum.end = totalPage;
+  useEffect(() => {
+
+    console.log(products.length,"마운트");
+    setStartPage((currentPage - 1) * 6);
+    setTotalPage(currentPage * 6);
+  }, [currentPage,startPage]);
+
   return (
     <div>
-    
+    <div style={{textAlign : "center"}}>
+        {pageNumber.map((v, i) => (
+          <div key={i} style={{ display: "inline-block", listStyleType: "none", marginLeft: "2.4rem"}}>
+            <div>
+              <li onClick={() => setCurrentPage(i+1)}>
+                <button>{i+1}</button>
+              </li>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   )
 

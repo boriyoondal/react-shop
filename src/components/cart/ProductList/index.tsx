@@ -7,30 +7,32 @@ import axios from "axios";
 import { Product } from "src/@types/types";
 import { GoPlus } from "react-icons/go";
 import { css } from "@emotion/react";
-import Page from "src/components/pagination";
+import Pagination from "src/components/pagination";
 
 export default function ProductList() {
-  const {  } = useSelector((store: RootState) => store.cart);
+    //@redux - toggle 구현 예정
+//   const { toggle } = useSelector((store: RootState) => store.cart);
   const dispatch = useDispatch();
+
   const [loading, setLoading] = useState(false);
 
   //@pagination/state
-  const [products, setProducts] = useState<Product[]>([]); // 총 게시물 data
-  const [startPage, setStartPage] = useState(0);
-  const [totalPage, setTotalPage] = useState(5);
-  const [currentPage, setCurrentPage] = useState(1);
+   const [products, setProducts] = useState<Product[]>([]); // 총 게시물 data
+   const [startPage, setStartPage] = useState(0);
+   const [totalPage, setTotalPage] = useState(5);
+   const [currentPage, setCurrentPage] = useState(1);
 
-  const pageNumber = [];
+//   const pageNumber = [];
 
-  for (let i = 1; i <= Math.ceil(products.length / 6); i++) {
-    pageNumber.push(i);
-  }
+//   for (let i = 1; i <= Math.ceil(products.length / 6); i++) {
+//     pageNumber.push(i);
+//   }
 
-  useEffect(() => {
-      console.log(products.length);
-    setStartPage((currentPage - 1) * 6);
-    setTotalPage(currentPage * 6);
-  }, [currentPage,startPage]);
+//   useEffect(() => {
+//       console.log(products.length);
+//     setStartPage((currentPage - 1) * 6);
+//     setTotalPage(currentPage * 6);
+//   }, [currentPage,startPage]);
 
   useEffect(() => {
     // 서버로부터 데이터 가져오기
@@ -132,7 +134,7 @@ export default function ProductList() {
         ))}
       </div>
       
-      <div style={{textAlign : "center"}}>
+      {/* <div style={{textAlign : "center"}}>
         {pageNumber.map((v, i) => (
           <div key={i} style={{ display: "inline-block", listStyleType: "none", marginLeft: "2.4rem"}}>
             <div>
@@ -142,8 +144,8 @@ export default function ProductList() {
             </div>
           </div>
         ))}
-      </div>
-
+      </div> */}
+      <Pagination products= {products}/>
     </div>
   );
 }
