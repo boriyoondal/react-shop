@@ -1,83 +1,78 @@
-import React, { useState,useEffect  } from "react";
-import {css, Theme} from "@emotion/react";
-import { IoCartOutline } from "react-icons/io5"
+import React, { useState, useEffect } from "react";
+import { css, Theme } from "@emotion/react";
+import { IoCartOutline } from "react-icons/io5";
 
 type SideType = {
-    width : number;
-    children : any;
-}
+  width: number;
+  children: any;
+};
 
-export default function Sidebar({width, children} : SideType) {
-    const [xPosition, setX] = useState(-width);
+export default function Sidebar({ width, children }: SideType) {
+  const [xPosition, setX] = useState(-width);
 
-    
-    const toggleMenu = () => {
-        if (xPosition < 0) { //sidebar가 음수인지 확인 = 숨겨져 있음
-            setX(0);
+  const toggleMenu = () => {
+    if (xPosition < 0) {
+      //sidebar가 음수인지 확인 = 숨겨져 있음
+      setX(0);
+    } else {
+      setX(-width);
+    }
+  };
 
-        }else {
-            setX(-width);
+  useEffect(() => {
+    setX(-width);
+  }, []);
 
-        }
-    };
-
-    useEffect(() => {setX(-width)
-    },[]);
-    
-    return (
-
-        <div 
-        css={Style.Sidebar}
+  return (
+    <div
+      css={Style.Sidebar}
+      style={{
+        transform: `translatex(${xPosition}px)`,
+        width: width,
+      }}
+    >
+      <div
+        className="toggle"
+        onClick={() => toggleMenu()}
+        css={Style.Togglemenu}
         style={{
-            transform: `translatex(${xPosition}px)`,
-            width: width, 
-            }}
-            >
-
-            <div
-            onClick={() => toggleMenu()}
-            css={Style.Togglemenu}
-            style={{
-                transform: `translate(${width}px, -10vh)`
-
-            }}
-            >
-            <IoCartOutline className="icon" size="36" color="#cc9c9c"/>    
-            </div>
-            <div className="content">{children}</div>
-        </div>
-        
-    )
+          transform: `translate(${width}px, -10vh)`,
+        }}
+      >
+        <IoCartOutline className="icon" size="36" color="#cc9c9c" />
+      </div>
+      <div className="content">{children}</div>
+    </div>
+  );
 }
 
 const Style = {
-    Sidebar : (theme : Theme) => css`
+  Sidebar: (theme: Theme) => css`
     max-width: 768px;
     height: 100%;
     border-radius: 0;
     transition: 0.4s ease;
-    background-color: #E3ECF1;
+    background-color: #e3ecf1;
     top: 0;
     bottom: 0;
     right: 0;
     z-index: 99;
 
-    ${theme.mobile}{
-        max-width : 100%;
-        height : auto;
-        align-items: flex-start;
-        margin : 0;
+    ${theme.mobile} {
+      max-width: 100%;
+      height: auto;
+      align-items: flex-start;
+      margin: 0;
     }
-    `,
+  `,
 
-    Togglemenu : css`
+  Togglemenu: css`
     position: absolute;
-    display : flex; 
+    display: flex;
     outline: none;
     z-index: 99;
-    margin-left : 1rem;
-    margin-top : 2.2rem;
-    background-color : none;
-    `
-    
-}
+    margin-left: 1rem;
+    margin-top: 2.2rem;
+    background-color: none;
+  `,
+};
