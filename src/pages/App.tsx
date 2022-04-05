@@ -33,9 +33,9 @@ export default function App() {
       <Body />
       <Footer />
 
-      <Routes>
-        <Route path="/pages/*" element={<Pagination/>}/>
-      </Routes>
+      {/* <Routes>
+        <Route path="/pages/*" element={</>}/>
+      </Routes> */}
     </>
   );
 }

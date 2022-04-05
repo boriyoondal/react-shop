@@ -7,28 +7,30 @@ import axios from "axios";
 import { Product } from "src/@types/types";
 import { GoPlus } from "react-icons/go";
 import { css } from "@emotion/react";
-import Pagination from "src/components/pagination";
+import Page from "src/components/pagination";
 
 export default function ProductList() {
-  const { toggle } = useSelector((store: RootState) => store.cart);
+  const {  } = useSelector((store: RootState) => store.cart);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
   //@pagination/state
   const [products, setProducts] = useState<Product[]>([]); // 총 게시물 data
-  // json 형태로 들어오기 때문에 배열 리터럴 [] 사용
+  const [startPage, setStartPage] = useState(0);
+  const [totalPage, setTotalPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const [start, setStart] = useState(1); // 페이징 시작
-  const [end, setEnd] = useState(6); // 페이징 마지막
+  const pageNumber = [];
 
-  const [isOpen, setIsOpen] = useState(false);
+  for (let i = 1; i <= Math.ceil(products.length / 6); i++) {
+    pageNumber.push(i);
+  }
 
-  const openCart = () => setIsOpen(true);
-  const closeCart = () => setIsOpen(false);
-
-  const cartToggle = (isOpen: boolean) => {
-    isOpen ? closeCart() : openCart();
-  };
+  useEffect(() => {
+      console.log(products.length);
+    setStartPage((currentPage - 1) * 6);
+    setTotalPage(currentPage * 6);
+  }, [currentPage,startPage]);
 
   useEffect(() => {
     // 서버로부터 데이터 가져오기
@@ -83,7 +85,7 @@ export default function ProductList() {
       <div>
         <h2 style={{ textAlign: "center", marginTop: "2rem", fontSize: "1.6rem" }}>SHOES LIST</h2>
 
-         {products.map((v, i) => (
+        {/* {products.slice(offset, offset + limit).map((v, i) => (
           <article key={i} css={Style.ItemBox}>
             <div css={Style.InnerItemBox}>
               <img src={v.image} style={{ width: 200, height: 200 , display: "inline-block"}} />
@@ -96,10 +98,52 @@ export default function ProductList() {
               </button>
             </div>
           </article>
-        ))} 
+        ))} */}
+
+        {/* {products.map((v, i) => (
+          <article key={i} css={Style.ItemBox}>
+            <div css={Style.InnerItemBox}>
+              <img src={v.image} style={{ width: 200, height: 200 , display: "inline-block"}} />
+              <p>{v.id}</p>
+              <p>{v.title}</p>
+              <p>{v.price}</p>
+              <br />
+              <button css={Style.Btn} onClick={() => dispatch(addCart(v))}>
+                {" "} <GoPlus /> {" "}
+              </button>
+            </div>
+          </article>
+        ))} */}
+
+        {products.slice(startPage, totalPage).map((v, i) => (
+          <article key={i} css={Style.ItemBox}>
+            <div css={Style.InnerItemBox}>
+              <img src={v.image} style={{ width: 200, height: 200, display: "inline-block" }} />
+              <p>{v.id}</p>
+              <p>{v.title}</p>
+              <p>{v.price}</p>
+              <br />
+              <button css={Style.Btn} onClick={() => dispatch(addCart(v))}>
+                {" "}
+                <GoPlus />{" "}
+              </button>
+            </div>
+          </article>
+        ))}
+      </div>
+      
+      <div style={{textAlign : "center"}}>
+        {pageNumber.map((v, i) => (
+          <div key={i} style={{ display: "inline-block", listStyleType: "none", marginLeft: "2.4rem"}}>
+            <div>
+              <li onClick={() => setCurrentPage(i+1)}>
+                <button>{i+1}</button>
+              </li>
+            </div>
+          </div>
+        ))}
       </div>
 
-      <Pagination></Pagination>
     </div>
   );
 }
