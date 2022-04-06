@@ -1,19 +1,18 @@
-import React,{ useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "src/store";
-
+import React,{ useEffect } from "react";
 // type
 import type { Product } from "src/@types/types";
 
 interface Props {
   products: Product[]
+  setStartPage: any
+  setTotalPage: any
+  setCurrentPage : any
+  currentPage: number
+  startPage: number
 }
 
 export default function Pagination(props: Props) {
-  const {products} = props; 
-  const [startPage, setStartPage] = useState(0);
-  const [totalPage, setTotalPage] = useState(5);
-  const [currentPage, setCurrentPage] = useState(1);
+  const {products, setStartPage, setTotalPage, setCurrentPage, currentPage,startPage} = props; 
 
   const pageNumber = [];
 
@@ -30,6 +29,7 @@ export default function Pagination(props: Props) {
 
   return (
     <div>
+
     <div style={{textAlign : "center"}}>
         {pageNumber.map((v, i) => (
           <div key={i} style={{ display: "inline-block", listStyleType: "none", marginLeft: "2.4rem"}}>
@@ -41,6 +41,7 @@ export default function Pagination(props: Props) {
           </div>
         ))}
       </div>
+
     </div>
   )
 

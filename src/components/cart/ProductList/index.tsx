@@ -145,7 +145,7 @@ export default function ProductList() {
           </div>
         ))}
       </div> */}
-      <Pagination products= {products}/>
+       <Pagination products={products} setStartPage={setStartPage} setTotalPage={setTotalPage} setCurrentPage={setCurrentPage} currentPage={currentPage} startPage={startPage}/>
     </div>
   );
 }
