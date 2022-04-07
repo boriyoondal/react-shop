@@ -9,9 +9,9 @@ export const INIT_ITEM = "INIT_ITEM" as const; // 최초에 localstorage 에 내
 export const TOGGLE_SWITCH = "TOGGLE_SWITCH" as const;
 
 //@Action
-export const addCart = (product:Product) => ({type : ADD_ITEM, product})
-export const deleteCart = (product:Product) => ({type : DELETE_ITEM, product})
-export const clearCart = () => ({type : CLEAR_ITEM})
-export const initCart = () => ({type : INIT_ITEM})
+export const addCart = (product: Product) => ({ type: ADD_ITEM, product });
+export const deleteCart = (product: Product) => ({ type: DELETE_ITEM, product });
+export const clearCart = () => ({ type: CLEAR_ITEM });
+export const initCart = () => ({ type: INIT_ITEM });
 
-export const toggleSwitch = () => ({type : TOGGLE_SWITCH})
+export const toggleSwitch = () => ({ type: TOGGLE_SWITCH });

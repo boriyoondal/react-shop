@@ -9,53 +9,52 @@ import { GoPlus } from "react-icons/go";
 import { css } from "@emotion/react";
 import Pagination from "src/components/pagination";
 
+const ITEMS_PER_PAGE = 6;
 
 export default function ProductList() {
-    //@redux - toggle 구현 예정
-//   const { toggle } = useSelector((store: RootState) => store.cart);
+  //@redux - toggle 구현 예정
+  //   const { toggle } = useSelector((store: RootState) => store.cart);
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(false);
 
   //@pagination/state
-   const [products, setProducts] = useState<Product[]>([]); // 총 게시물 data
-   const [startPage, setStartPage] = useState(0);
-   const [totalPage, setTotalPage] = useState(6);
-   const [currentPage, setCurrentPage] = useState(1);
+  const [products, setProducts] = useState<Product[]>([]); // 총 게시물 data
+  const [startPage, setStartPage] = useState(0);
+  const [totalPage, setTotalPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
-//   const pageNumber = [];
+  //   const pageNumber = [];
 
-//   for (let i = 1; i <= Math.ceil(products.length / 6); i++) {
-//     pageNumber.push(i);
-//   }
+  //   for (let i = 1; i <= Math.ceil(products.length / 6); i++) {
+  //     pageNumber.push(i);
+  //   }
 
-//   useEffect(() => {
-//       console.log(products.length);
-//     setStartPage((currentPage - 1) * 6);
-//     setTotalPage(currentPage * 6);
-//   }, [currentPage,startPage]);
+  //   useEffect(() => {
+  //       console.log(products.length);
+  //     setStartPage((currentPage - 1) * 6);
+  //     setTotalPage(currentPage * 6);
+  //   }, [currentPage,startPage]);
 
   useEffect(() => {
-    // // 서버로부터 데이터 가져오기
-    // async function fetchData() {
-    //   setLoading(true);
-    //   const res = await axios.get("http://localhost:9999/api");
-    //   setProducts(res.data);
-    //   setLoading(false);
-    //   console.log(res.data);
-    // }
-    // fetchData();
+    // 서버로부터 데이터 가져오기
+    async function fetchData() {
+      setLoading(true);
+      const res = await axios.get("http://localhost:9999/api");
+      setProducts(res.data);
+      setLoading(false);
+      console.log(res.data);
+    }
+    fetchData();
 
-    
-        (async () => {
-            const response  = await new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    resolve(API)
-                }, 300);
-            })
-            setProducts(response as any);
-        })();
-        
+    // (async () => {
+    //   const response = await new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       resolve(API);
+    //     }, 300);
+    //   });
+    //   setProducts(response as any);
+    // })();
 
     /*
         new Promise((resolve, reject) => {
@@ -69,9 +68,9 @@ export default function ProductList() {
 
     // // 서버로부터 API 받아오기
     // axios.get("http://localhost:9999/api").then((res) => {
-    //     console.log(res);
-    //     setProducts(res.data);
-    // })
+    //   console.log(res);
+    //   setProducts(res.data);
+    // });
 
     /*
         (async () => {
@@ -82,6 +81,12 @@ export default function ProductList() {
   }, []);
 
   //@Pagination
+  useEffect(() => {
+    const lastPage = Math.ceil(products.length / ITEMS_PER_PAGE);
+    setTotalPage(lastPage ? lastPage : 1);
+  }, [products]);
+
+  const currentPageData = products.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   return (
     <div>
@@ -117,8 +122,8 @@ export default function ProductList() {
             </div>
           </article>
         ))} */}
-
-        {products.slice(startPage, totalPage).map((v, i) => (
+        {/* 현재 페이지 데이터 slice */}
+        {currentPageData.map((v, i) => (
           <article key={i} css={Style.ItemBox}>
             <div css={Style.InnerItemBox}>
               <img src={v.image} style={{ width: 200, height: 200, display: "inline-block" }} />
@@ -134,7 +139,7 @@ export default function ProductList() {
           </article>
         ))}
       </div>
-      
+
       {/* <div style={{textAlign : "center"}}>
         {pageNumber.map((v, i) => (
           <div key={i} style={{ display: "inline-block", listStyleType: "none", marginLeft: "2.4rem"}}>
@@ -147,7 +152,15 @@ export default function ProductList() {
         ))}
       </div> */}
 
-      <Pagination products={products} setStartPage={setStartPage} setTotalPage={setTotalPage} setCurrentPage={setCurrentPage} currentPage={currentPage} startPage={startPage}/>
+      <Pagination
+        products={products}
+        currentPage={currentPage}
+        startPage={startPage}
+        totalPage={totalPage}
+        setStartPage={setStartPage}
+        setTotalPage={setTotalPage}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 }

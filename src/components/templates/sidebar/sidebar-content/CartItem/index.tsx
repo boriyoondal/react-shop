@@ -6,13 +6,13 @@ import { Product } from "src/@types/types";
 import { css } from "@emotion/react";
 
 export default function CartItem() {
+  //@redux
   const dispatch = useDispatch();
   const { products } = useSelector((store: RootState) => store.cart);
 
   // let sum = 0;
   // const cartSum = products.length >= 1 ? products.map((v,i) => {
   //     sum += v.price;
-
   // })
 
   return (
@@ -27,20 +27,22 @@ export default function CartItem() {
             {v.price}
             <br />
             <br />
-            <button css={Style.btnStyle} onClick={() => dispatch(deleteCart(v))}>삭제</button>{' '}
+            <button css={Style.btnStyle} onClick={() => dispatch(deleteCart(v))}>
+              삭제
+            </button>{" "}
           </div>
         ))
       ) : (
         <div> 장바구니가 비어있습니다 </div>
       )}
-      <br/>
-      <button css={Style.btnStyle} onClick={() => dispatch(clearCart())}>비우기</button>
-
+      <br />
+      <button css={Style.btnStyle} onClick={() => dispatch(clearCart())}>
+        비우기
+      </button>
       {/* <div> 합계 : {sum} </div> */}
     </div>
   );
 }
-
 
 const Style = {
   btnStyle: css`

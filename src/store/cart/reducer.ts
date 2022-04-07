@@ -1,22 +1,13 @@
 //@ts
 import { Product } from "src/@types/types";
 //@action
-import { 
-    addCart, 
-    deleteCart, 
-    clearCart, 
-    initCart,
-    ADD_ITEM, 
-    DELETE_ITEM, 
-    CLEAR_ITEM, 
-    INIT_ITEM
-    } from "../cart/action";
+import { addCart, deleteCart, clearCart, initCart, ADD_ITEM, DELETE_ITEM, CLEAR_ITEM, INIT_ITEM } from "../cart/action";
 
-type Action = 
-    ReturnType<typeof addCart> 
-    | ReturnType<typeof deleteCart> 
-    | ReturnType<typeof clearCart> 
-    | ReturnType<typeof initCart>
+type Action =
+  | ReturnType<typeof addCart>
+  | ReturnType<typeof deleteCart>
+  | ReturnType<typeof clearCart>
+  | ReturnType<typeof initCart>;
 
 interface State {
   products:
@@ -29,14 +20,14 @@ interface State {
       }[]
     | [];
   totalAmount: number;
-  toggle : boolean;
+  toggle: boolean;
 }
 
 //@init
 const initialState: State = {
   products: [],
   totalAmount: 0,
-  toggle : false
+  toggle: false,
 };
 
 //@reducer
@@ -54,7 +45,7 @@ const reducer = (state = initialState, action: Action) => {
             }]))
             */
 
-      const storage = localStorage.getItem("items") ;
+      const storage = localStorage.getItem("items");
       if (!!storage !== false) {
         console.log(storage, JSON.parse(storage as string));
         const data:
@@ -65,8 +56,7 @@ const reducer = (state = initialState, action: Action) => {
               price: number;
               image: string;
             }[]
-          | [] = JSON.parse(storage as string) ;
-
+          | [] = JSON.parse(storage as string);
         return {
           ...state,
           products: data,
@@ -78,27 +68,28 @@ const reducer = (state = initialState, action: Action) => {
       };
 
     case ADD_ITEM:
-        console.log("ADD_ITEM");
+      console.log("ADD_ITEM");
+      //@ts-ignore
+      let price = action.product.price.replace(",", "");
+      price = parseInt(price);
+
+      const newData = action.product;
+
+      localStorage.setItem("items", JSON.stringify([...state.products, newData]));
+      const data = localStorage.getItem("items");
+      const setData = JSON.parse(data as string);
+
+      return {
+        ...state,
+        products: [...state.products, action.product],
         //@ts-ignore
-        let price = action.product.price.replace(",", "");
-        price = parseInt(price);
-
-        const newData = action.product;
-        
-        localStorage.setItem("items", JSON.stringify([...state.products, newData]));
-
-        return {
-            ...state,
-            products: [...state.products, action.product],
-            //@ts-ignore
-            totalAmount: state.totalAmount + price,
-            toggle : true,
-        };
-      
+        totalAmount: state.totalAmount + price,
+        toggle: true,
+      };
 
     case DELETE_ITEM:
-        // localStorage.clear();
-        // filter
+      // localStorage.clear();
+      // filter
 
       return {
         ...state,
@@ -107,11 +98,11 @@ const reducer = (state = initialState, action: Action) => {
       };
 
     case CLEAR_ITEM:
-        localStorage.clear();
+      localStorage.clear();
       return {
         ...state,
         products: [],
-        totalAmount : 0
+        totalAmount: 0,
       };
 
     default:

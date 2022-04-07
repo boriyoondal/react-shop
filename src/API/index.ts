@@ -76,14 +76,14 @@ export default [
       },
       {
         id : "1",
-        title : "shoes01",
+        title : "shoes10",
         description : "👗",
         price : "10,000",
         image :  "https://kream-phinf.pstatic.net/MjAyMTA3MjhfMjIg/MDAxNjI3NDQxMDA1NjE5.HOgIYywGZaaBJDqUzx2OnX9HAxoOWPvuWHqUn_LZGcgg.VYIuOfA5_GgjBGRowv6dmQuAOPtUvmAxbGpOyUCOCtYg.PNG/p_9d8ed1a74d2540ab9842e63363607bf4.png?type=m_webp",
     },
     {
         id: "2",
-        title: "shoes02",
+        title: "shoes11",
         description:
           "👔",
         price: "20,000",
@@ -92,7 +92,7 @@ export default [
     },
     {
         id: "3",
-        title: "shoes03",
+        title: "shoes12",
         description:
           "👕",
         price: "30,000", 
@@ -101,14 +101,14 @@ export default [
     },
     {
       id : "4",
-      title : "shoes04",
+      title : "shoes13",
       description : "👗",
       price : "10,000",
       image :  "https://kream-phinf.pstatic.net/MjAyMTA4MDZfMjY0/MDAxNjI4MjM5NTA1MjU1.9FfkTXbxZFWKxDMdPayVFlD0GIyNT-mFVIQ7zZW3SPcg.c03UoCFjKXtP4XtNMgBdrmTOIQlqxrePk4JScV4GUHEg.PNG/p_8001cbaf0db042bda09fea320ee328b4.png?type=m_webp",
     },
     {
       id: "5",
-      title: "shoes05",
+      title: "shoes14",
       description:
         "👔",
       price: "20,000",
@@ -117,7 +117,7 @@ export default [
     },
     {
       id: "6",
-      title: "shoes06",
+      title: "shoes15",
       description:
         "👕",
       price: "30,000", 
@@ -126,7 +126,7 @@ export default [
     },
     {
       id: "7",
-      title: "shoes07",
+      title: "shoes16",
       description:
         "👕",
       price: "30,000", 
@@ -135,14 +135,14 @@ export default [
   },
   {
     id : "8",
-    title : "shoes08",
+    title : "shoes17",
     description : "👗",
     price : "10,000",
     image :  "https://kream-phinf.pstatic.net/MjAyMTA0MDJfMTE2/MDAxNjE3MzU2MDgyOTQx._YYmfkMlqvAs6uE0tqFkF_rwIQYKEK4KwP188wswnh8g.B2ZCn1ZAN8h_qTlTk-7jNTB7M4yMmjh7hwFa3CO8zIIg.PNG/p_3f37ae036808499d839aa116ee22a81c.png?type=m_webp",
   },
   {
     id: "9",
-    title: "shoes09",
+    title: "shoes18",
     description:
       "👔",
     price: "20,000",
