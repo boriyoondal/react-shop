@@ -1,127 +1,47 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/store";
+import { Product } from "src/@types/types";
 import API from "src/API";
 import { addCart } from "src/store/cart/action";
 import axios from "axios";
-import { Product } from "src/@types/types";
+
 import { GoPlus } from "react-icons/go";
 import { css } from "@emotion/react";
 import Pagination from "src/components/pagination";
+import { start } from "repl";
 
 const ITEMS_PER_PAGE = 6;
 
 export default function ProductList() {
-  //@redux - toggle 구현 예정
-  //   const { toggle } = useSelector((store: RootState) => store.cart);
   const dispatch = useDispatch();
-
-  const [loading, setLoading] = useState(false);
 
   //@pagination/state
   const [products, setProducts] = useState<Product[]>([]); // 총 게시물 data
-  const [startPage, setStartPage] = useState(0);
+  const [startPage, setStartPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
 
-  //   const pageNumber = [];
-
-  //   for (let i = 1; i <= Math.ceil(products.length / 6); i++) {
-  //     pageNumber.push(i);
-  //   }
-
-  //   useEffect(() => {
-  //       console.log(products.length);
-  //     setStartPage((currentPage - 1) * 6);
-  //     setTotalPage(currentPage * 6);
-  //   }, [currentPage,startPage]);
-
   useEffect(() => {
-    // 서버로부터 데이터 가져오기
     async function fetchData() {
-      setLoading(true);
       const res = await axios.get("http://localhost:9999/api");
       setProducts(res.data);
-      setLoading(false);
-      console.log(res.data);
     }
     fetchData();
-
-    // (async () => {
-    //   const response = await new Promise((resolve, reject) => {
-    //     setTimeout(() => {
-    //       resolve(API);
-    //     }, 300);
-    //   });
-    //   setProducts(response as any);
-    // })();
-
-    /*
-        new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(API)
-            }, 300);
-        }).then((res) => {
-            setProducts(res as any);
-        })
-        */
-
-    // // 서버로부터 API 받아오기
-    // axios.get("http://localhost:9999/api").then((res) => {
-    //   console.log(res);
-    //   setProducts(res.data);
-    // });
-
-    /*
-        (async () => {
-            const result = await axios.get("/items");
-            setProducts(result.data);
-        })()
-        */
   }, []);
 
-  //@Pagination
   useEffect(() => {
-    const lastPage = Math.ceil(products.length / ITEMS_PER_PAGE);
-    setTotalPage(lastPage ? lastPage : 1);
-  }, [products]);
+    setStartPage((currentPage - 1) * ITEMS_PER_PAGE);
+    setTotalPage(products.length / ITEMS_PER_PAGE);
+  });
 
+  //slice(시작 인덱스,종료 인덱스)
   const currentPageData = products.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
-
   return (
     <div>
       <div>
         <h2 style={{ textAlign: "center", marginTop: "2rem", fontSize: "1.6rem" }}>SHOES LIST</h2>
 
-        {/* {products.slice(offset, offset + limit).map((v, i) => (
-          <article key={i} css={Style.ItemBox}>
-            <div css={Style.InnerItemBox}>
-              <img src={v.image} style={{ width: 200, height: 200 , display: "inline-block"}} />
-              <p>{v.id}</p>
-              <p>{v.title}</p>
-              <p>{v.price}</p>
-              <br />
-              <button css={Style.Btn} onClick={() => dispatch(addCart(v))}>
-                {" "} <GoPlus /> {" "}
-              </button>
-            </div>
-          </article>
-        ))} */}
-
-        {/* {products.map((v, i) => (
-          <article key={i} css={Style.ItemBox}>
-            <div css={Style.InnerItemBox}>
-              <img src={v.image} style={{ width: 200, height: 200 , display: "inline-block"}} />
-              <p>{v.id}</p>
-              <p>{v.title}</p>
-              <p>{v.price}</p>
-              <br />
-              <button css={Style.Btn} onClick={() => dispatch(addCart(v))}>
-                {" "} <GoPlus /> {" "}
-              </button>
-            </div>
-          </article>
-        ))} */}
         {/* 현재 페이지 데이터 slice */}
         {currentPageData.map((v, i) => (
           <article key={i} css={Style.ItemBox}>
@@ -140,31 +60,12 @@ export default function ProductList() {
         ))}
       </div>
 
-      {/* <div style={{textAlign : "center"}}>
-        {pageNumber.map((v, i) => (
-          <div key={i} style={{ display: "inline-block", listStyleType: "none", marginLeft: "2.4rem"}}>
-            <div>
-              <li onClick={() => setCurrentPage(i+1)}>
-                <button>{i+1}</button>
-              </li>
-            </div>
-          </div>
-        ))}
-      </div> */}
-
-      <Pagination
-        products={products}
-        currentPage={currentPage}
-        startPage={startPage}
-        totalPage={totalPage}
-        setStartPage={setStartPage}
-        setTotalPage={setTotalPage}
-        setCurrentPage={setCurrentPage}
-      />
+      <Pagination currentPage={currentPage} totalPage={totalPage} setCurrentPage={setCurrentPage} />
     </div>
   );
 }
 
+//@ CSS
 const Style = {
   ItemBox: css`
     padding: 1rem;

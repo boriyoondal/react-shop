@@ -9,7 +9,6 @@ export default function SidebarContent() {
   const dispatch = useDispatch();
   const { products, totalAmount } = useSelector((store: RootState) => store.cart);
   const [price, setPrice] = useState();
-  console.log("현재 장바구니 금액: " + totalAmount);
   // useEffect(() => {
   //   const saved = localStorage.getItem("price");
   //   if (saved !== null) {
