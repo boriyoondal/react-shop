@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 // icon
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
+// css
+import { css } from "@emotion/react";
 // import
 import MovePagination from "src/func/index";
 
@@ -52,8 +54,9 @@ export default function Pagination(props: Props) {
             <button
               onClick={setCurrentPage}
               style={{
-                backgroundColor: currentPage === i ? "#0d6efd" : "transparent",
+                backgroundColor: currentPage === i ? "#f0f0f0" : "#080808",
               }}
+              css={Style.CircleBtn}
             >
               {i}
             </button>
@@ -66,3 +69,23 @@ export default function Pagination(props: Props) {
     </div>
   );
 }
+
+const Style = {
+  CircleBtn: css`
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    outline: none;
+    padding: 10px;
+    cursor: pointer;
+    overflow: hidden;
+    border: none;
+    -webkit-border-radius: 10%;
+    border-radius: 10%;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    background: #1abc9c;
+    -webkit-box-shadow: 0 4px 3px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 3px 2px rgba(0, 0, 0, 0.2);
+  `,
+};

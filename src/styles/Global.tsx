@@ -133,7 +133,7 @@ const GlobalCss = (theme: Theme) => css`
   html,
   body {
     /* background-color: #f3f6f9; */
-    background-color: #e9ecf1;
+    background-color: #f0f0f0;
   }
 `;
 

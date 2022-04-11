@@ -16,10 +16,9 @@ export default function Header() {
                 <button onClick={() => {
                     setToggle((prevState) => !prevState);
                 }}>Change</button> */}
-                
         </div>
         <Sidebar width={320}>
-          <SidebarContent/>
+          <SidebarContent />
         </Sidebar>
       </div>
     </>
@@ -31,7 +30,7 @@ const Style = {
     position: relative;
     width: 100%;
     text-align: center;
-    background-color: #ffffff;
+    background-color: #f0f0f0;
     height: 72px;
   `,
   InnerContainer: (theme: Theme) => css`
