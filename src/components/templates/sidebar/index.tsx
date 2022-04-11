@@ -36,10 +36,11 @@ export default function Sidebar({ width, children }: SideType) {
         onClick={() => toggleMenu()}
         css={Style.Togglemenu}
         style={{
-          transform: `translate(${width}px, -10vh)`,
+          transform: xPosition < 0 === true ? `translate(${width}px, -10vh)` : `translate(${0}px, -10vh)`,
+          marginLeft: xPosition < 0 === true ? "1rem" : "1rem",
         }}
       >
-        <IoCartOutline className="icon" size="36" color="#cc9c9c" />
+        <IoCartOutline className="icon" size="36" color="#080808" />
       </div>
       <div className="content">{children}</div>
     </div>
@@ -71,7 +72,6 @@ const Style = {
     display: flex;
     outline: none;
     z-index: 99;
-    margin-left: 1rem;
     margin-top: 2.2rem;
     background-color: none;
   `,

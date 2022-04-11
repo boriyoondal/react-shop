@@ -5,7 +5,7 @@ import { useEffect } from "react";
 // redux
 import { useDispatch, useSelector } from "react-redux";
 
-import { initCart } from "src/store/cart/action";
+import { initCart, initPrice } from "src/store/cart/action";
 
 // route
 import { Route, Routes } from "react-router-dom";
@@ -17,6 +17,10 @@ export default function App() {
 
   useEffect(() => {
     dispatch(initCart());
+  }, []);
+
+  useEffect(() => {
+    dispatch(initPrice());
   }, []);
 
   return (

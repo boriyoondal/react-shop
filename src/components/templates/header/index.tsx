@@ -11,11 +11,6 @@ export default function Header() {
       <div css={Style.Container}>
         <div css={Style.InnerContainer}>
           <div css={Style.Logo}>SHOPPING CART</div>
-
-          {/*<div css={toggle ? [Style.Logo, Style.Logo_on] : Style.Logo }>LOGO</div>
-                <button onClick={() => {
-                    setToggle((prevState) => !prevState);
-                }}>Change</button> */}
         </div>
         <Sidebar width={320}>
           <SidebarContent />

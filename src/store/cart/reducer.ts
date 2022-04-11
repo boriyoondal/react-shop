@@ -1,13 +1,26 @@
 //@ts
 import { Product } from "src/@types/types";
+import ProductList from "src/components/cart/ProductList";
 //@action
-import { addCart, deleteCart, clearCart, initCart, ADD_ITEM, DELETE_ITEM, CLEAR_ITEM, INIT_ITEM } from "../cart/action";
+import {
+  addCart,
+  deleteCart,
+  clearCart,
+  initCart,
+  ADD_ITEM,
+  DELETE_ITEM,
+  CLEAR_ITEM,
+  INIT_ITEM,
+  INIT_PRICE,
+  initPrice,
+} from "../cart/action";
 
 type Action =
   | ReturnType<typeof addCart>
   | ReturnType<typeof deleteCart>
   | ReturnType<typeof clearCart>
-  | ReturnType<typeof initCart>;
+  | ReturnType<typeof initCart>
+  | ReturnType<typeof initPrice>;
 
 interface State {
   products:
@@ -67,6 +80,21 @@ const reducer = (state = initialState, action: Action) => {
         ...state,
       };
 
+    case INIT_PRICE:
+      console.log("init price");
+      const pricestorage = localStorage.getItem("price");
+      if (!!pricestorage !== false) {
+        const pricedata: number = JSON.parse(pricestorage as string);
+
+        return {
+          ...state,
+          totalAmount: pricedata + state.totalAmount,
+        };
+      }
+      return {
+        ...state,
+      };
+
     case ADD_ITEM:
       console.log("ADD_ITEM");
       //@ts-ignore
@@ -76,8 +104,10 @@ const reducer = (state = initialState, action: Action) => {
       const newData = action.product;
 
       localStorage.setItem("items", JSON.stringify([...state.products, newData]));
+      localStorage.setItem("price", JSON.stringify(price + state.totalAmount));
+
       const data = localStorage.getItem("items");
-      const setData = JSON.parse(data as string);
+      const pricedata = localStorage.getItem("price");
 
       return {
         ...state,
@@ -91,10 +121,16 @@ const reducer = (state = initialState, action: Action) => {
       // localStorage.clear();
       // filter
 
+      //@ts-ignore
+      let reprice = action.product.price.replace(",", "");
+      console.log(reprice);
+      console.log(state.totalAmount);
+      localStorage.setItem("price", JSON.stringify(state.totalAmount - reprice));
+      localStorage.setItem("items", JSON.stringify([...state.products]));
       return {
         ...state,
         products: [...state.products.filter((product) => product !== action.product)],
-        // totalAmount : state.totalAmount - price
+        totalAmount: state.totalAmount - reprice,
       };
 
     case CLEAR_ITEM:

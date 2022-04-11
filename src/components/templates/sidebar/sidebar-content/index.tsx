@@ -8,15 +8,13 @@ import { addCart } from "src/store/cart/action";
 export default function SidebarContent() {
   const dispatch = useDispatch();
   const { products, totalAmount } = useSelector((store: RootState) => store.cart);
-  const [price, setPrice] = useState();
-  // useEffect(() => {
-  //   const saved = localStorage.getItem("price");
-  //   if (saved !== null) {
-  //     //@ts-ignore
-  //     setPrice(parseInt(saved));
-  //     console.log(price);
-  //   }
-  // }, [price]);
+  const [price, setPrice] = useState(0);
+
+  useEffect(() => {
+    setPrice(totalAmount);
+    console.log(price);
+  }, [totalAmount]);
+
   return (
     <div css={Style.Container}>
       <div css={Style.InnerContainer}>
@@ -26,7 +24,7 @@ export default function SidebarContent() {
         </div>
         <CartList />
         <br />
-        <div>합계 : {totalAmount} 원</div>
+        <div>합계 : {price} 원</div>
       </div>
     </div>
   );
