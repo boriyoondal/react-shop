@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { css, Theme } from "@emotion/react";
-import { IoCartOutline } from "react-icons/io5";
+import { BsFillCartCheckFill } from "react-icons/bs";
 
 type SideType = {
   width: number;
@@ -37,10 +37,10 @@ export default function Sidebar({ width, children }: SideType) {
         css={Style.Togglemenu}
         style={{
           transform: xPosition < 0 === true ? `translate(${width}px, -10vh)` : `translate(${0}px, -10vh)`,
-          marginLeft: xPosition < 0 === true ? "1rem" : "1rem",
+          marginLeft: "1rem",
         }}
       >
-        <IoCartOutline className="icon" size="36" color="#080808" />
+        <BsFillCartCheckFill className="icon" size="36" color="#080808" />
       </div>
       <div className="content">{children}</div>
     </div>
