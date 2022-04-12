@@ -4,16 +4,18 @@ import { Link } from "react-router-dom";
 import { RootState } from "src/store";
 import { css, Theme } from "@emotion/react";
 import CartList from "./CartList";
+import { Product } from "src/@types/types";
 
 export default function SidebarContent() {
-  const { totalAmount, pcs } = useSelector((store: RootState) => store.cart);
+  const { totalAmount, pcs, products } = useSelector((store: RootState) => store.cart);
   const [price, setPrice] = useState(0);
   const [qty, setqty] = useState(0);
-
+  const [item, setItem] = useState<Product[]>([]);
   useEffect(() => {
     setPrice(totalAmount);
     setqty(pcs);
-  }, [totalAmount, pcs]);
+    setItem(products);
+  }, [totalAmount, pcs, products]);
 
   return (
     <div css={Style.Container}>

@@ -17,7 +17,7 @@ const ITEMS_PER_PAGE = 6;
 
 export default function ProductList() {
   const dispatch = useDispatch();
-  const { value } = useSelector((store: RootState) => store.cart);
+  // const { value } = useSelector((store: RootState) => store.cart);
   //@pagination/state
   const [products, setProducts] = useState<Product[]>([]); // 총 게시물 data
   const [startPage, setStartPage] = useState(1);
@@ -37,9 +37,9 @@ export default function ProductList() {
     setTotalPage(products.length / ITEMS_PER_PAGE);
   });
 
-  useEffect(() => {
-    setVal(value);
-  }, [value]);
+  // useEffect(() => {
+  //   setVal(value);
+  // }, [value]);
 
   //slice(시작 인덱스,종료 인덱스)
   const currentPageData = products.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
@@ -58,7 +58,7 @@ export default function ProductList() {
               <p>{v.price}</p>
               <br />
               <div onClick={() => dispatch(plusAction(v))} style={{ fontSize: "1.2rem" }}>
-                <RiHeartAddLine size="24" /> {v.value}
+                {/* <RiHeartAddLine size="24" color="tomato" /> {value} */}
               </div>
               <br />
               <button css={Style.Btn} onClick={() => dispatch(addCart(v))}>

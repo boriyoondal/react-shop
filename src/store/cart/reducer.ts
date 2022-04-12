@@ -31,12 +31,10 @@ interface State {
         description: string;
         price: number;
         image: string;
-        value: number;
       }[]
     | [];
   totalAmount: number;
   pcs: number;
-  value: number;
 }
 
 //@init
@@ -44,7 +42,6 @@ const initialState: State = {
   products: [],
   totalAmount: 0,
   pcs: 0,
-  value: 0,
 };
 
 //@reducer
@@ -53,7 +50,6 @@ const reducer = (state = initialState, action: Action) => {
     case INIT_ITEM:
       console.log("init");
       const storage = localStorage.getItem("items");
-      const qtystorage = localStorage.getItem("qty");
       if (!!storage !== false) {
         console.log(storage, JSON.parse(storage as string));
         const data:
@@ -63,14 +59,12 @@ const reducer = (state = initialState, action: Action) => {
               description: string;
               price: number;
               image: string;
-              value: number;
             }[]
           | [] = JSON.parse(storage as string);
         return {
           ...state,
           products: data,
           pcs: data.length,
-          value: state.value + 1,
         };
       }
 
@@ -99,11 +93,13 @@ const reducer = (state = initialState, action: Action) => {
       let price = action.product.price.replace(",", "");
       price = parseInt(price);
 
-      const pcsNewData = localStorage.getItem("items");
-      const pcsData = JSON.parse(pcsNewData as string);
       const newData = action.product;
+
       localStorage.setItem("items", JSON.stringify([...state.products, newData]));
       localStorage.setItem("price", JSON.stringify(price + state.totalAmount));
+
+      const data = localStorage.getItem("items");
+      const pricedata = localStorage.getItem("price");
       // localStorage.setItem("qty", JSON.stringify(pcsData.length));
       return {
         ...state,
@@ -116,10 +112,12 @@ const reducer = (state = initialState, action: Action) => {
     case DELETE_ITEM:
       //@ts-ignore
       let reprice = action.product.price.replace(",", "");
-      reprice = parseInt(reprice);
 
       localStorage.setItem("price", JSON.stringify(state.totalAmount - reprice));
-      localStorage.setItem("items", JSON.stringify([...state.products]));
+      localStorage.setItem(
+        "items",
+        JSON.stringify([...state.products.filter((product) => product !== action.product)]),
+      );
       return {
         ...state,
         products: [...state.products.filter((product) => product !== action.product)],
@@ -134,15 +132,16 @@ const reducer = (state = initialState, action: Action) => {
         ...state,
         products: [],
         totalAmount: 0,
+        pcs: 0,
       };
 
-    case PLUS:
-      let getValue = action.product.value;
-      console.log(getValue);
-      return {
-        ...state,
-        value: state.value++,
-      };
+    // case PLUS:
+    //   let getValue = action.product.value;
+    //   console.log(getValue);
+    //   return {
+    //     ...state,
+    //     value: state.value++,
+    //   };
 
     default:
       return state;

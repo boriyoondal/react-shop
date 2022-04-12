@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "../templates/header";
-import Footer from "../templates/footer";
+import Header from "../../components/templates/header";
+import Footer from "../../components/templates/footer";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/store";
 import { deleteCart } from "src/store/cart/action";

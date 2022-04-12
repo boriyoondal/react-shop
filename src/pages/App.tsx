@@ -6,12 +6,11 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { initCart, initPrice } from "src/store/cart/action";
-import CheckoutPage from "src/components/checkoutPage";
+import CheckoutPage from "src/pages/checkoutPage";
 
 // route
 import { Route, Routes } from "react-router-dom";
 import Main from "./Main";
-import Pagination from "src/components/pagination";
 
 export default function App() {
   const dispatch = useDispatch();
