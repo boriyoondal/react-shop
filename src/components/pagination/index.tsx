@@ -50,7 +50,7 @@ export default function Pagination(props: Props) {
             <button
               onClick={setCurrentPage}
               style={{
-                backgroundColor: currentPage === i ? "#1abc9c" : "#f0f0f0",
+                backgroundColor: currentPage === i ? "#080808" : "#f0f0f0",
               }}
               css={Style.CircleBtn}
             >
@@ -107,6 +107,6 @@ const Style = {
     border-radius: 10%;
     color: rgba(255, 255, 255, 0.9);
     text-align: center;
-    background: #1abc9c;
+    background: #080808;
   `,
 };

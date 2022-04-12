@@ -16,6 +16,8 @@ const Style = {
     width: 100%;
     height: 100px;
     text-align: center;
+    margin-top: 1.6rem;
+    background-color: #ffffff;
   `,
   InnerContainer: css`
     max-width: 1024px;

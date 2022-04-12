@@ -9,19 +9,21 @@ import axios from "axios";
 import { GoPlus } from "react-icons/go";
 import { css } from "@emotion/react";
 import Pagination from "src/components/pagination";
-import { start } from "repl";
+import styled from "@emotion/styled";
+import { plusAction } from "src/store/demo/action";
+import { RiHeartAddLine } from "react-icons/ri";
 
 const ITEMS_PER_PAGE = 6;
 
 export default function ProductList() {
   const dispatch = useDispatch();
-
+  const { value } = useSelector((store: RootState) => store.cart);
   //@pagination/state
   const [products, setProducts] = useState<Product[]>([]); // 총 게시물 data
   const [startPage, setStartPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-
+  const [val, setVal] = useState(0);
   useEffect(() => {
     async function fetchData() {
       const res = await axios.get("http://localhost:9999/api");
@@ -35,10 +37,14 @@ export default function ProductList() {
     setTotalPage(products.length / ITEMS_PER_PAGE);
   });
 
+  useEffect(() => {
+    setVal(value);
+  }, [value]);
+
   //slice(시작 인덱스,종료 인덱스)
   const currentPageData = products.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
   return (
-    <div>
+    <div css={Style.Container}>
       <div>
         <h2 style={{ textAlign: "center", marginTop: "2rem", fontSize: "1.6rem" }}>SHOES LIST</h2>
 
@@ -51,9 +57,13 @@ export default function ProductList() {
               <p>{v.title}</p>
               <p>{v.price}</p>
               <br />
+              <div onClick={() => dispatch(plusAction(v))} style={{ fontSize: "1.2rem" }}>
+                <RiHeartAddLine size="24" /> {v.value}
+              </div>
+              <br />
               <button css={Style.Btn} onClick={() => dispatch(addCart(v))}>
                 {" "}
-                <GoPlus />{" "}
+                장바구니 추가 <GoPlus />{" "}
               </button>
             </div>
           </article>
@@ -67,6 +77,9 @@ export default function ProductList() {
 
 //@ CSS
 const Style = {
+  Container: css`
+    margin-bottom: 4rem;
+  `,
   ItemBox: css`
     padding: 1rem;
     margin: 2.2rem;

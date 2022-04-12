@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/store";
 import { clearCart, deleteCart } from "src/store/cart/action";
-import { Product } from "src/@types/types";
 import { css } from "@emotion/react";
 
 export default function CartItem() {
@@ -10,26 +8,23 @@ export default function CartItem() {
   const dispatch = useDispatch();
   const { products } = useSelector((store: RootState) => store.cart);
 
-  // let sum = 0;
-  // const cartSum = products.length >= 1 ? products.map((v,i) => {
-  //     sum += v.price;
-  // })
-
   return (
     <div>
       {products.length >= 1 ? (
         products.map((v, i) => (
-          <div key={i}>
-            <img src={v.image} style={{ width: 50, height: 50 }} alt={"prod-img"} />
+          <div key={i} css={Style.DivStyle}>
+            <img src={v.image} style={{ width: 100, height: 100 }} alt={"prod-img"} />
             <br />
-            {v.title}
+            상품명 : {v.title}
             <br />
-            {v.price}
+            <br />
+            {v.price}원
             <br />
             <br />
             <button css={Style.btnStyle} onClick={() => dispatch(deleteCart(v))}>
-              삭제
+              X
             </button>{" "}
+            <br />
           </div>
         ))
       ) : (
@@ -37,21 +32,27 @@ export default function CartItem() {
       )}
       <br />
       <button css={Style.btnStyle} onClick={() => dispatch(clearCart())}>
-        비우기
+        장바구니 비우기
       </button>
-      {/* <div> 합계 : {sum} </div> */}
     </div>
   );
 }
 
 const Style = {
+  DivStyle: css`
+    padding: 1rem;
+    background-color: #f5f5f5;
+    margin-bottom: 1.6rem;
+    border: 1px solid #808080;
+  `,
+
   btnStyle: css`
     margin: 0;
     border: none;
     cursor: pointer;
     font-family: "Noto Sans KR", sans-serif;
     font-size: var(--button-font-size, 1rem);
-    padding: var(--button-padding, 12px 16px);
+    padding: var(--button-padding, 12px 12px);
     border-radius: var(--button-radius, 8px);
     background: var(--button-bg-color, #0d6efd);
     color: var(--button-color, #ffffff);

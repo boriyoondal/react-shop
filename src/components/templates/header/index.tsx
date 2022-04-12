@@ -10,9 +10,11 @@ export default function Header() {
     <>
       <div css={Style.Container}>
         <div css={Style.InnerContainer}>
-          <div css={Style.Logo}>SHOPPING CART</div>
+          <div css={Style.Logo} style={{ fontSize: "2rem" }}>
+            SHOPPING CART
+          </div>
         </div>
-        <Sidebar width={320}>
+        <Sidebar width={440}>
           <SidebarContent />
         </Sidebar>
       </div>

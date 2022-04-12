@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { initCart, initPrice } from "src/store/cart/action";
+import CheckoutPage from "src/components/checkoutPage";
 
 // route
 import { Route, Routes } from "react-router-dom";
@@ -27,6 +28,7 @@ export default function App() {
     <>
       <Routes>
         <Route path="/" element={<Main />} />/
+        <Route path="/checkout" element={<CheckoutPage />} />
       </Routes>
     </>
   );
