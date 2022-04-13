@@ -1,23 +1,46 @@
 import React, { useState } from "react";
 import { css, Theme } from "@emotion/react";
+import { Link } from "react-router-dom";
 import Sidebar from "../sidebar";
 import SidebarContent from "../sidebar/sidebar-content";
+import isLogin1 from "src/libs/isLogin";
 
 export default function Header() {
-  // const [toggle, setToggle] = useState(false);
-
   return (
     <>
-      <div css={Style.Container}>
-        <div css={Style.InnerContainer}>
-          <div css={Style.Logo} style={{ fontSize: "2rem" }}>
-            SHOPPING CART
+      {isLogin1() ? (
+        <div>
+          로그인 상태
+          <div css={Style.Container}>
+            <div css={Style.InnerContainer}>
+              <div css={Style.Logo} style={{ fontSize: "2rem" }}>
+                SHOPPING CART
+              </div>
+            </div>
+            <Sidebar width={440}>
+              <SidebarContent />
+            </Sidebar>
           </div>
         </div>
-        <Sidebar width={440}>
-          <SidebarContent />
-        </Sidebar>
-      </div>
+      ) : (
+        <div>
+          <Link to="/login">
+            <div css={Style.btnStyle} style={{ height: "30px", width: "80px" }}>
+              로그인
+            </div>
+          </Link>
+          <div css={Style.Container}>
+            <div css={Style.InnerContainer}>
+              <div css={Style.Logo} style={{ fontSize: "2rem" }}>
+                SHOPPING CART
+              </div>
+            </div>
+            <Sidebar width={440}>
+              <SidebarContent />
+            </Sidebar>
+          </div>
+        </div>
+      )}
     </>
   );
 }
@@ -62,5 +85,31 @@ const Style = {
     & > li {
       margin: 0 1rem;
     }
+  `,
+  btnStyle: css`
+    border: none;
+    cursor: pointer;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: var(--button-font-size, 1rem);
+    padding: 5px;
+    background: var(--button-bg-color, tomato);
+    color: var(--button-color, #ffffff);
+    text-align: center;
+
+    &:active,
+    &:hover,
+    &:focus {
+      background: var(--button-hover-bg-color, tomato);
+    }
+
+    &:disabled {
+      cursor: default;
+      opacity: 0.5;
+      background: var(--button-bg-color, tomato);
+    }
+
+    --button-font-size: 0.875rem;
+    --button-padding: 12px 14px;
+    --button-radius: 4px;
   `,
 };

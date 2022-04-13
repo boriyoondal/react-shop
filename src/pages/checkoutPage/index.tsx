@@ -17,7 +17,14 @@ export default function CheckoutPage() {
       <br />
       {products.map((v, i) => (
         <div key={i} style={{ textAlign: "center", width: "100%" }}>
-          <div style={{ backgroundColor: "#ffffff", width: "1024px", margin: "0 auto" }}>
+          <div
+            style={{
+              backgroundColor: "#ffffff",
+              width: "1024px",
+              margin: "0 auto",
+              // border: "1px solid #808080",
+            }}
+          >
             <img src={v.image} style={{ width: 100, height: 100 }} alt={"prod-img"} />
             <br />
             상품명 : {v.title}
@@ -31,9 +38,11 @@ export default function CheckoutPage() {
         <div
           style={{ backgroundColor: "#080808", width: "1024px", margin: "0 auto", padding: "10px", color: "#f8f8f8" }}
         >
-          ✔ Qty : <span style={{ fontSize: "1.2rem" }}>{pcs}</span>개 <br />
+          ✔ 총 수량 : <span style={{ fontSize: "1.2rem" }}>{pcs}</span>개 <br />
           <br />
-          <div>합계 : {totalAmount}원</div>
+          <div>
+            합계 : <span style={{ fontSize: "1.2rem" }}>{totalAmount}</span>원
+          </div>
           <br />
           <button css={Style.btnStyle}>결제하기</button>
         </div>

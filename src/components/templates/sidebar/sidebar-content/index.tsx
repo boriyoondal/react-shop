@@ -11,6 +11,7 @@ export default function SidebarContent() {
   const [price, setPrice] = useState(0);
   const [qty, setqty] = useState(0);
   const [item, setItem] = useState<Product[]>([]);
+
   useEffect(() => {
     setPrice(totalAmount);
     setqty(pcs);

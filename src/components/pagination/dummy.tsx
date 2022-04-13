@@ -4,7 +4,7 @@ import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import type { Product } from "src/@types/types";
 // icon
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
-import MovePagination from "src/func/index";
+import MovePagination from "src/libs/func/index";
 
 interface Props {
   products: Product[];

@@ -5,7 +5,7 @@ import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 // css
 import { Theme, css } from "@emotion/react";
 // import
-import MovePagination from "src/func/index";
+import MovePagination from "src/libs/func/index";
 
 interface Props {
   totalPage: number;

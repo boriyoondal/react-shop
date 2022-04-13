@@ -11,6 +11,7 @@ import CheckoutPage from "src/pages/checkoutPage";
 // route
 import { Route, Routes } from "react-router-dom";
 import Main from "./Main";
+import Login from "./Login/login";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ export default function App() {
     <>
       <Routes>
         <Route path="/" element={<Main />} />/
+        <Route path="/login" element={<Login />} />
         <Route path="/checkout" element={<CheckoutPage />} />
       </Routes>
     </>

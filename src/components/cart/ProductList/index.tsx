@@ -24,13 +24,20 @@ export default function ProductList() {
   const [totalPage, setTotalPage] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [val, setVal] = useState(0);
-  useEffect(() => {
-    async function fetchData() {
-      const res = await axios.get("http://localhost:9999/api");
-      setProducts(res.data);
-    }
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const res = await axios.get("http://localhost:9999/api");
+  //     setProducts(res.data);
+  //   }
+  //   fetchData();
+  // }, []);
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(API);
+    }, 300);
+  }).then((res) => {
+    setProducts(res as any);
+  });
 
   useEffect(() => {
     setStartPage((currentPage - 1) * ITEMS_PER_PAGE);
@@ -58,7 +65,7 @@ export default function ProductList() {
               <p>{v.price}</p>
               <br />
               <div onClick={() => dispatch(plusAction(v))} style={{ fontSize: "1.2rem" }}>
-                {/* <RiHeartAddLine size="24" color="tomato" /> {value} */}
+                <RiHeartAddLine size="24" color="tomato" />
               </div>
               <br />
               <button css={Style.Btn} onClick={() => dispatch(addCart(v))}>

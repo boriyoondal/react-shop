@@ -1,0 +1,77 @@
+import {
+  loginRequestAction,
+  loginSuccessAction,
+  loginFailAction,
+  logOutAction,
+  LOGIN_FAIL,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGOUT_ACTION,
+} from "./action";
+
+export type LoginAction =
+  | ReturnType<typeof loginRequestAction>
+  | ReturnType<typeof loginSuccessAction>
+  | ReturnType<typeof loginFailAction>
+  | ReturnType<typeof logOutAction>;
+
+export type LoginState = {
+  id: string | null;
+  name: string;
+  logInLoading: boolean; // 로그인
+  logInDone: boolean;
+  logInError: unknown;
+  is_loaded: boolean;
+  setUser: any;
+};
+const initialState: LoginState = {
+  id: null,
+  name: "",
+  logInLoading: false,
+  logInDone: false,
+  logInError: null,
+  is_loaded: false,
+  setUser: null,
+};
+
+export default function reducer(state: LoginState = initialState, action: LoginAction) {
+  switch (action.type) {
+    case LOGIN_REQUEST:
+      console.log("login 요청");
+      const storage = localStorage.getItem("login");
+      localStorage.setItem("login", JSON.stringify(action.data));
+      console.log(storage);
+
+      return {
+        ...state,
+        logInLoading: true,
+        logInDone: false,
+        logInError: null,
+        is_loaded: true,
+      };
+
+    case LOGIN_SUCCESS:
+      console.log("login 성공");
+
+      return {
+        ...state,
+        logInLoading: false,
+        logInDone: true,
+      };
+    case LOGIN_FAIL:
+      console.log("login 실패");
+      return {
+        ...state,
+        logInLoading: false,
+        logInError: action.error,
+      };
+    case LOGOUT_ACTION:
+      localStorage.removeItem("login");
+      return {};
+    default: {
+      return {
+        ...state,
+      };
+    }
+  }
+}

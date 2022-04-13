@@ -1,5 +1,5 @@
 //@action
-import { type } from "os";
+
 import {
   addCart,
   deleteCart,
@@ -127,7 +127,8 @@ const reducer = (state = initialState, action: Action) => {
 
     case CLEAR_ITEM:
       alert("장바구니를 비우시겠습니까?");
-      localStorage.clear();
+      localStorage.removeItem("item");
+      localStorage.removeItem("price");
       return {
         ...state,
         products: [],
