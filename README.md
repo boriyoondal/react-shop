@@ -1,12 +1,13 @@
 ## 구현 사항
 
 1. sidebar
-2. 쇼핑카트 추가
-3. 페이지네이션
-4. 로그인, 로그아웃 (하드코딩)
+2. Shopping cart
+3. Pagination
+4. Login, Logout
 
 ## 라이브러리
 
-1. 리덕스
-2. 이모션
-3. React 라우터 (?page=1)
+1. redux
+   1-(1). redux-saga
+2. @emotion
+3. React Router (?page=1)
