@@ -1,6 +1,6 @@
 import React from "react";
 import { css, Theme } from "@emotion/react";
-import ProductList from "../../cart/ProductList";
+import ProductList from "../../ProductList";
 export default function Body() {
   return (
     <div css={Style.Container}>

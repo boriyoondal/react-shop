@@ -10,7 +10,7 @@ import CheckoutPage from "src/pages/checkoutPage";
 
 // route
 import { Route, Routes } from "react-router-dom";
-import Main from "./Main";
+import Main from "./Main/Main";
 import Login from "./Login/login";
 
 export default function App() {

@@ -1,11 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // icon
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 // css
 import { Theme, css } from "@emotion/react";
 // import
-import MovePagination from "src/libs/func/index";
+import MovePagination from "src/libs/paginationFunc";
 
 interface Props {
   totalPage: number;

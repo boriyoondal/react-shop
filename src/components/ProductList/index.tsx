@@ -10,7 +10,6 @@ import { GoPlus } from "react-icons/go";
 import { css } from "@emotion/react";
 import Pagination from "src/components/pagination";
 import styled from "@emotion/styled";
-import { plusAction } from "src/store/demo/action";
 import { RiHeartAddLine } from "react-icons/ri";
 
 const ITEMS_PER_PAGE = 6;
@@ -64,7 +63,7 @@ export default function ProductList() {
               <p>{v.title}</p>
               <p>{v.price}</p>
               <br />
-              <div onClick={() => dispatch(plusAction(v))} style={{ fontSize: "1.2rem" }}>
+              <div style={{ fontSize: "1.2rem" }}>
                 <RiHeartAddLine size="24" color="tomato" />
               </div>
               <br />
