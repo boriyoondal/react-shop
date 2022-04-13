@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { css } from "@emotion/react";
 import Footer from "src/components/templates/footer";
 import Header from "src/components/templates/header";
