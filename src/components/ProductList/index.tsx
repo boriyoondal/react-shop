@@ -22,7 +22,7 @@ export default function ProductList() {
   const [startPage, setStartPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const [val, setVal] = useState(0);
+
   // useEffect(() => {
   //   async function fetchData() {
   //     const res = await axios.get("http://localhost:9999/api");
@@ -30,6 +30,7 @@ export default function ProductList() {
   //   }
   //   fetchData();
   // }, []);
+
   new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(API);

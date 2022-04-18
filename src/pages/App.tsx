@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import { css, Theme } from "@emotion/react";
+import React from "react";
 import { useEffect } from "react";
 
 // redux
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { initCart, initPrice } from "src/store/cart/action";
 import CheckoutPage from "src/pages/checkoutPage";

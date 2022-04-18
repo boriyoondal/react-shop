@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { css } from "@emotion/react";
@@ -83,7 +82,7 @@ export default function Login() {
             value={account.id}
             name="id"
             onChange={handleAccount}
-            placeholder="🔑ID"
+            placeholder="🔑ID를 입력하세요"
           />
           <input
             css={Style.Input}
@@ -92,7 +91,7 @@ export default function Login() {
             name="pw"
             value={account.pw}
             onChange={handleAccount}
-            placeholder="🔒PW"
+            placeholder="🔒PW를 입력하세요"
           />
           <button css={Style.LoginBtn} type="submit" onClick={onSubmitAccount}>
             LOGIN

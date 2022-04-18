@@ -33,6 +33,8 @@ function* watchLogin() {
   //EventListener
   console.log("saga/watchlogin");
   yield takeLatest(LOGIN_REQUEST, login);
+  //takeLastest => 액션 모니터링 함수, 특정 액션 타입의 가장 마지막에 디스패치된 액션만 처리
+  //takeEvery => 특정 액션 타입에 대하여 디스패치되는 모든 액션들을 처리
 }
 
 export default function* loginsaga() {
