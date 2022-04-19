@@ -6,12 +6,17 @@ import {
   clearCart,
   initCart,
   initPrice,
-  plusAction,
-  ADD_ITEM,
-  DELETE_ITEM,
+  getPost,
+  getPostFail,
+  getPostSuccess,
   CLEAR_ITEM,
   INIT_ITEM,
   INIT_PRICE,
+  ADD_ITEM,
+  DELETE_ITEM,
+  GET_POST,
+  GET_POST_SUCCESS,
+  GET_POST_FAIL,
 } from "../cart/action";
 
 type Action =
@@ -20,8 +25,9 @@ type Action =
   | ReturnType<typeof clearCart>
   | ReturnType<typeof initCart>
   | ReturnType<typeof initPrice>
-  | ReturnType<typeof plusAction>;
-
+  | ReturnType<typeof getPost>
+  | ReturnType<typeof getPostFail>
+  | ReturnType<typeof getPostSuccess>;
 interface State {
   products:
     | {
@@ -34,6 +40,8 @@ interface State {
     | [];
   totalAmount: number;
   pcs: number;
+  loading: boolean;
+  error: unknown;
 }
 
 //@init
@@ -41,6 +49,8 @@ const initialState: State = {
   products: [],
   totalAmount: 0,
   pcs: 0,
+  loading: false,
+  error: null,
 };
 
 //@reducer
@@ -134,13 +144,29 @@ const reducer = (state = initialState, action: Action) => {
         pcs: 0,
       };
 
-    // case PLUS:
-    //   let getValue = action.product.value;
-    //   console.log(getValue);
-    //   return {
-    //     ...state,
-    //     value: state.value++,
-    //   };
+    case GET_POST:
+      return {
+        ...state,
+        products: [],
+        loading: true,
+        error: null,
+      };
+
+    case GET_POST_SUCCESS:
+      return {
+        ...state,
+        products: [],
+        loading: false,
+        error: null,
+      };
+
+    case GET_POST_FAIL:
+      return {
+        ...state,
+        products: [],
+        loading: false,
+        error: Error,
+      };
 
     default:
       return state;

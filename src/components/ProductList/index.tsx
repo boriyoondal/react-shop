@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams, Link, Navigate, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Product } from "src/@types/types";
 import { addCart } from "src/store/cart/action";
@@ -12,6 +13,7 @@ const ITEMS_PER_PAGE = 6;
 
 export default function ProductList() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // const { value } = useSelector((store: RootState) => store.cart);
   //@pagination/state
   const [products, setProducts] = useState<Product[]>([]); // 총 게시물 data
@@ -52,7 +54,13 @@ export default function ProductList() {
 
         {/* 현재 페이지 데이터 slice */}
         {currentPageData.map((v, i) => (
-          <article key={i} css={Style.ItemBox}>
+          <article
+            key={i}
+            css={Style.ItemBox}
+            onClick={() => {
+              navigate(`/product/${i + 1}`); // url 변경
+            }}
+          >
             <div css={Style.InnerItemBox}>
               <img src={v.image} style={{ width: 200, height: 200, display: "inline-block" }} />
               <p>{v.id}</p>
@@ -71,7 +79,6 @@ export default function ProductList() {
           </article>
         ))}
       </div>
-
       <Pagination currentPage={currentPage} totalPage={totalPage} setCurrentPage={setCurrentPage} />
     </div>
   );

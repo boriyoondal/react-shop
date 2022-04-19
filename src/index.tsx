@@ -8,10 +8,6 @@ import { BrowserRouter } from "react-router-dom";
 
 // redux
 import { Provider } from "react-redux";
-import { applyMiddleware, createStore } from "redux";
-import rootReducer from "./store/rootReducer";
-import createSagaMiddleware from "@redux-saga/core";
-import rootsaga from "./store/rootsaga";
 
 // emtion
 import { ThemeProvider } from "@emotion/react";
