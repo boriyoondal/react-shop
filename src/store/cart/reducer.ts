@@ -12,7 +12,6 @@ import {
   CLEAR_ITEM,
   INIT_ITEM,
   INIT_PRICE,
-  PLUS,
 } from "../cart/action";
 
 type Action =
@@ -51,7 +50,6 @@ const reducer = (state = initialState, action: Action) => {
       console.log("init");
       const storage = localStorage.getItem("items");
       if (!!storage !== false) {
-        console.log(storage, JSON.parse(storage as string));
         const data:
           | {
               id: string;
@@ -100,13 +98,13 @@ const reducer = (state = initialState, action: Action) => {
 
       const data = localStorage.getItem("items");
       const pricedata = localStorage.getItem("price");
-      // localStorage.setItem("qty", JSON.stringify(pcsData.length));
+
       return {
         ...state,
         products: [...state.products, action.product],
         //@ts-ignore
         totalAmount: state.totalAmount + price,
-        pcs: state.pcs,
+        pcs: state.pcs + 1,
       };
 
     case DELETE_ITEM:
@@ -122,7 +120,7 @@ const reducer = (state = initialState, action: Action) => {
         ...state,
         products: [...state.products.filter((product) => product !== action.product)],
         totalAmount: state.totalAmount - reprice,
-        pcs: state.pcs,
+        pcs: state.pcs - 1,
       };
 
     case CLEAR_ITEM:

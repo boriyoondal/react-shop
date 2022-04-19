@@ -1,11 +1,14 @@
 import React from "react";
-import { css, Theme } from "@emotion/react";
+import { css } from "@emotion/react";
 
 export default function Footer() {
   return (
     <div css={Style.Container}>
       <div css={Style.InnerContainer}>
-        <p style={{ margin: "2.4rem 0" }}>Copyright 2022 ✔ All right Reserved.</p>
+        <p style={{ margin: "2.4rem 0" }}>
+          Copyright 2022 <br />
+          <br /> All right Reserved.
+        </p>
       </div>
     </div>
   );

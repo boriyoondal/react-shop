@@ -1,18 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { css, Theme } from "@emotion/react";
 import { Link } from "react-router-dom";
-import Sidebar from "../sidebar";
-import SidebarContent from "../sidebar/sidebar-content";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/store";
 import { logOutAction } from "src/store/login/action";
-import isLogin1 from "src/libs/isLogin";
+import Sidebar from "../sidebar";
+import SidebarContent from "../sidebar/sidebar-content";
+import isLoginCheck from "src/libs/isLogin";
 
 export default function Header() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [loginState, setLoginState] = useState("");
+  const { name } = useSelector((store: RootState) => store.login);
+
+  useEffect(() => {
+    isLoginCheck() ? setLoginState("로그아웃") : setLoginState("로그인");
+  }, []);
+
+  const onClickHandler = () => {
+    navigate("/");
+  };
   return (
     <>
-      {isLogin1() ? (
+      {isLoginCheck() ? (
         <div>
           <Link to="/">
             <div
@@ -20,12 +32,13 @@ export default function Header() {
               style={{ height: "30px", width: "80px" }}
               onClick={() => dispatch(logOutAction())}
             >
-              로그아웃
+              {loginState}
             </div>
+            {name}
           </Link>
           <div css={Style.Container}>
             <div css={Style.InnerContainer}>
-              <div css={Style.Logo} style={{ fontSize: "2rem" }}>
+              <div css={Style.Logo} style={{ fontSize: "2rem" }} onClick={onClickHandler}>
                 SHOPPING CART
               </div>
             </div>
@@ -38,12 +51,12 @@ export default function Header() {
         <div>
           <Link to="/login">
             <div css={Style.btnStyle} style={{ height: "30px", width: "80px" }}>
-              로그인
+              {loginState}
             </div>
           </Link>
           <div css={Style.Container}>
             <div css={Style.InnerContainer}>
-              <div css={Style.Logo} style={{ fontSize: "2rem" }}>
+              <div css={Style.Logo} style={{ fontSize: "2rem" }} onClick={onClickHandler}>
                 SHOPPING CART
               </div>
             </div>

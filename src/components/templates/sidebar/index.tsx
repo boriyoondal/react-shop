@@ -32,10 +32,6 @@ export default function Sidebar({ width, children }: SideType) {
     }
   };
 
-  // useEffect(() => {
-  //   setX(-width);
-  // }, [setX]);
-
   return (
     <div
       css={Style.Sidebar}

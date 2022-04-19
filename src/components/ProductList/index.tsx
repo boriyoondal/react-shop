@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "src/store";
+import { useDispatch } from "react-redux";
 import { Product } from "src/@types/types";
-import API from "src/API";
 import { addCart } from "src/store/cart/action";
-import axios from "axios";
-
-import { GoPlus } from "react-icons/go";
 import { css } from "@emotion/react";
-import Pagination from "src/components/pagination";
-import styled from "@emotion/styled";
+import { GoPlus } from "react-icons/go";
 import { RiHeartAddLine } from "react-icons/ri";
+import Pagination from "src/components/pagination";
+import API from "src/API";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -23,6 +19,8 @@ export default function ProductList() {
   const [totalPage, setTotalPage] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
 
+  //* 서버에서 data 가져오기
+
   // useEffect(() => {
   //   async function fetchData() {
   //     const res = await axios.get("http://localhost:9999/api");
@@ -31,10 +29,11 @@ export default function ProductList() {
   //   fetchData();
   // }, []);
 
+  //* 자체 dummy data 가져오기
   new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(API);
-    }, 300);
+    }, 100);
   }).then((res) => {
     setProducts(res as any);
   });
@@ -43,10 +42,6 @@ export default function ProductList() {
     setStartPage((currentPage - 1) * ITEMS_PER_PAGE);
     setTotalPage(products.length / ITEMS_PER_PAGE);
   });
-
-  // useEffect(() => {
-  //   setVal(value);
-  // }, [value]);
 
   //slice(시작 인덱스,종료 인덱스)
   const currentPageData = products.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);

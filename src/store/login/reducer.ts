@@ -21,8 +21,6 @@ export type LoginState = {
   logInLoading: boolean; // 로그인
   logInDone: boolean;
   logInError: unknown;
-  is_loaded: boolean;
-  setUser: any;
 };
 const initialState: LoginState = {
   id: null,
@@ -30,44 +28,42 @@ const initialState: LoginState = {
   logInLoading: false,
   logInDone: false,
   logInError: null,
-  is_loaded: false,
-  setUser: null,
 };
 
 export default function reducer(state: LoginState = initialState, action: LoginAction) {
   switch (action.type) {
     case LOGIN_REQUEST:
-      console.log("login 요청");
-      const storage = localStorage.getItem("login");
-      localStorage.setItem("login", JSON.stringify(action.data));
-      console.log(storage);
+      console.log("reducer/ login 요청");
 
       return {
         ...state,
         logInLoading: true,
         logInDone: false,
         logInError: null,
-        is_loaded: true,
       };
 
     case LOGIN_SUCCESS:
-      console.log("login 성공");
+      console.log("reducer/ login 성공");
 
       return {
         ...state,
         logInLoading: false,
         logInDone: true,
       };
+
     case LOGIN_FAIL:
-      console.log("login 실패");
+      console.log("reducer / login 실패");
       return {
         ...state,
         logInLoading: false,
         logInError: action.error,
       };
+
     case LOGOUT_ACTION:
       localStorage.removeItem("login");
+      console.log("로그아웃");
       return {};
+
     default: {
       return {
         ...state,

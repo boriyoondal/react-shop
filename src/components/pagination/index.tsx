@@ -17,9 +17,6 @@ const PAGES_PER_LIST = 5; // page 당 표출 할 리스트 개수
 export default function Pagination(props: Props) {
   const navigate = useNavigate();
   const { currentPage, totalPage, setCurrentPage } = props;
-
-  console.log("검사", currentPage, totalPage);
-
   //left arrow toggle
   const changeNumbersBackward = () => {
     setCurrentPage(currentPage - 1);

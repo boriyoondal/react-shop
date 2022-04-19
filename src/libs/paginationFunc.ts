@@ -2,8 +2,6 @@ export default function MovePagination(currentPage: number, totalPage: number, P
   //   const finalTotalPage = [0, 0, 0, 0, 0];
 
   const finalTotalPage = Array(totalPage < 5 ? totalPage : 5).fill(0);
-  console.log("현재:", currentPage, "전체:", totalPage);
-
   let res;
 
   if (currentPage < PAGES_PER_LIST / 2) {

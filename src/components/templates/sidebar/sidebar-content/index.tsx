@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Product } from "src/@types/types";
+import { useSelector } from "react-redux";
 import { RootState } from "src/store";
+import { Link } from "react-router-dom";
 import { css, Theme } from "@emotion/react";
 import CartList from "./CartList";
-import { Product } from "src/@types/types";
 
 export default function SidebarContent() {
   const { totalAmount, pcs, products } = useSelector((store: RootState) => store.cart);

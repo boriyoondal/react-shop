@@ -9,6 +9,10 @@ import { css } from "@emotion/react";
 export default function CheckoutPage() {
   const dispatch = useDispatch();
   const { products, pcs, totalAmount } = useSelector((store: RootState) => store.cart);
+
+  const onClickCheckOut = () => {
+    alert("결제하기");
+  };
   return (
     <div>
       <Header />
@@ -44,7 +48,9 @@ export default function CheckoutPage() {
             합계 : <span style={{ fontSize: "1.2rem" }}>{totalAmount}</span>원
           </div>
           <br />
-          <button css={Style.btnStyle}>결제하기</button>
+          <button css={Style.btnStyle} onClick={onClickCheckOut}>
+            결제하기
+          </button>
         </div>
       </div>
       <Footer />

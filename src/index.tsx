@@ -11,16 +11,13 @@ import { Provider } from "react-redux";
 import { applyMiddleware, createStore } from "redux";
 import rootReducer from "./store/rootReducer";
 import createSagaMiddleware from "@redux-saga/core";
-import rootsaga from "./store/login/rootsaga";
+import rootsaga from "./store/rootsaga";
 
 // emtion
 import { ThemeProvider } from "@emotion/react";
 import Theme from "./styles/Theme";
 import GlobalStyle from "./styles/Global";
-
-const sagaMiddleware = createSagaMiddleware();
-const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
-sagaMiddleware.run(rootsaga);
+import store from "./store";
 
 ReactDOM.render(
   <React.StrictMode>

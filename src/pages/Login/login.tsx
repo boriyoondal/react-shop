@@ -7,7 +7,7 @@ import Spinner from "src/components/spinner/spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { loginRequestAction } from "src/store/login/action";
 import { RootState } from "src/store";
-import { fetchLogin } from "src/API/userAPI";
+import isLoginCheck from "src/libs/isLogin";
 
 export default function Login() {
   const { id, logInLoading } = useSelector((store: RootState) => store.login);
@@ -26,37 +26,15 @@ export default function Login() {
         [e.target.name]: e.target.value,
       };
     });
-    console.log(account);
   };
 
   const onSubmitForm = (e: React.FormEvent) => {
-    console.log("login clicked");
     e.preventDefault();
+    console.log("login clicked");
     const { id, pw } = account;
-    if (id.trim() === "" || pw === "") return alert("아이디 또는 비밀번호를 확인해주세요.");
-    dispatch(
-      loginRequestAction({
-        id: id,
-        pw,
-      }),
-    );
+    dispatch(loginRequestAction({ id, pw }));
+    isLoginCheck() ? navigate("/") : navigate("/login");
   };
-
-  const onSubmitAccount = async () => {
-    try {
-      const user = await fetchLogin(account);
-      console.log(user);
-      navigate("/");
-    } catch (error) {
-      window.alert(error);
-    }
-  };
-
-  useEffect(() => {
-    if (id) {
-      navigate("/", { replace: true });
-    }
-  }, [id, navigate]);
 
   return (
     <div>
@@ -75,7 +53,7 @@ export default function Login() {
           {" "}
           LOGIN{" "}
         </h2>
-        <form onSubmit={onSubmitForm}>
+        <form method="post" onSubmit={onSubmitForm}>
           <input
             css={Style.Input}
             type="text"
@@ -93,10 +71,9 @@ export default function Login() {
             onChange={handleAccount}
             placeholder="🔒PW를 입력하세요"
           />
-          <button css={Style.LoginBtn} type="submit" onClick={onSubmitAccount}>
+          <button css={Style.LoginBtn} type="submit">
             LOGIN
           </button>
-          {/* </Link> */}
         </form>
       </div>
       <Footer />

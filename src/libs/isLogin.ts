@@ -1,2 +1,2 @@
-const isLogin1 = () => !!localStorage.getItem("login");
-export default isLogin1;
+const isLoginCheck = () => !!localStorage.getItem("login");
+export default isLoginCheck;
