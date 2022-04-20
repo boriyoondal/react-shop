@@ -54,14 +54,13 @@ export default function ProductList() {
 
         {/* 현재 페이지 데이터 slice */}
         {currentPageData.map((v, i) => (
-          <article
-            key={i}
-            css={Style.ItemBox}
-            onClick={() => {
-              navigate(`/product/${i + 1}`); // url 변경
-            }}
-          >
-            <div css={Style.InnerItemBox}>
+          <article key={i} css={Style.ItemBox}>
+            <div
+              css={Style.InnerItemBox}
+              onClick={() => {
+                navigate(`/product/${i + 1}`); // url 변경, 동적라우팅
+              }}
+            >
               <img src={v.image} style={{ width: 200, height: 200, display: "inline-block" }} />
               <p>{v.id}</p>
               <p>{v.title}</p>
@@ -71,11 +70,11 @@ export default function ProductList() {
                 <RiHeartAddLine size="24" color="tomato" />
               </div>
               <br />
-              <button css={Style.Btn} onClick={() => dispatch(addCart(v))}>
-                {" "}
-                장바구니 추가 <GoPlus />{" "}
-              </button>
             </div>
+            <button css={Style.Btn} onClick={() => dispatch(addCart(v))}>
+              {" "}
+              장바구니 추가 <GoPlus />{" "}
+            </button>
           </article>
         ))}
       </div>

@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <div css={Style.Container}>
       <div css={Style.InnerContainer}>
-        <p style={{ margin: "2.4rem 0" }}>
+        <p style={{ margin: "2rem 0" }}>
           Copyright 2022 <br />
           <br /> All right Reserved.
         </p>

@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { Product } from "src/@types/types";
 import { RootState } from "src/store";
 import { css } from "@emotion/react";
+import { addCart } from "src/store/cart/action";
+import { GoPlus } from "react-icons/go";
 import API from "src/API";
 import Footer from "src/components/templates/footer";
 import Header from "src/components/templates/header";
@@ -43,9 +45,17 @@ export default function DetailPage() {
             <div css={Style.InnerContainer}>
               <img src={prod.image} height="400px" />
               <div css={Style.DetailContainer}>
+                <br />
                 제품번호 : {prod.id}
+                <br />
                 제품명 : {prod.title}
+                <br />
                 가격 : {prod.price}
+                <br />
+                <button css={Style.Btn} onClick={() => dispatch(addCart(prod))}>
+                  {" "}
+                  장바구니 추가 <GoPlus />{" "}
+                </button>
               </div>
             </div>
           </div>
@@ -59,22 +69,49 @@ export default function DetailPage() {
 const Style = {
   Container: css`
     padding: 60px 0 0 0;
-    width: 400px;
-    margin-left: 15rem;
-    margin-top: 2rem;
-    border: 1px solid black;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
   `,
   InnerContainer: css`
     align-items: flex-start;
-    display: flex;
     margin: 1rem 1rem;
+    max-width: 1024px;
+    border: 1px solid black;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: -1;
   `,
   DetailContainer: css`
     text-align: center;
     font-size: 1.6rem;
-    display: flex;
-    float: right;
-    margin-right: 15rem;
-    margin-top: 10rem;
+    display: inline-block;
+    margin: 6rem 2rem;
+    width: 400px;
+  `,
+  Btn: css`
+    margin: 0;
+    border: none;
+    cursor: pointer;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: var(--button-font-size, 1rem);
+    padding: var(--button-padding, 12px 16px);
+    border-radius: var(--button-radius, 8px);
+    background: var(--button-bg-color, #0d6efd);
+    color: var(--button-color, #ffffff);
+    &:active,
+    &:hover,
+    &:focus {
+      background: var(--button-hover-bg-color, #025ce2);
+    }
+
+    &:disabled {
+      cursor: default;
+      opacity: 0.5;
+      background: var(--button-bg-color, #025ce2);
+    }
   `,
 };
