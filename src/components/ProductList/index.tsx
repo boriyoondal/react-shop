@@ -7,6 +7,7 @@ import { css } from "@emotion/react";
 import { GoPlus } from "react-icons/go";
 import { RiHeartAddLine } from "react-icons/ri";
 import Pagination from "src/components/pagination";
+import "bootstrap/dist/css/bootstrap.min.css";
 import API from "src/API";
 
 const ITEMS_PER_PAGE = 6;
@@ -53,7 +54,7 @@ export default function ProductList() {
         <h2 style={{ textAlign: "center", marginTop: "2rem", fontSize: "1.6rem" }}>SHOES LIST</h2>
 
         {/* 현재 페이지 데이터 slice */}
-        {currentPageData.map((v, i) => (
+        {/* {currentPageData.map((v, i) => (
           <article key={i} css={Style.ItemBox}>
             <div
               css={Style.InnerItemBox}
@@ -70,14 +71,34 @@ export default function ProductList() {
                 <RiHeartAddLine size="24" color="tomato" />
               </div>
               <br />
-            </div>
-            <button css={Style.Btn} onClick={() => dispatch(addCart(v))}>
+            </div>{" "}
+            <button type="button" className="btn btn-secondary" onClick={() => dispatch(addCart(v))}>
               {" "}
-              장바구니 추가 <GoPlus />{" "}
+              장바구니 추가 <GoPlus />
             </button>
           </article>
-        ))}
+        ))}*/}
       </div>
+      {currentPageData.map((v, i) => (
+        <div className="card" css={Style.ItemBox} key={i}>
+          <div
+            css={Style.InnerItemBox}
+            className="card-body"
+            onClick={() => {
+              navigate(`/product/${i + 1}`); // url 변경, 동적라우팅
+            }}
+          >
+            <img src={v.image} style={{ width: 200, height: 200, display: "inline-block" }} />
+            <h6 className="card-subtitle mb-2 text-muted">{v.id}</h6>
+            <h4 className="card-title">{v.title}</h4>
+            <p className="card-text">{v.price}</p>
+          </div>
+          <button type="button" className="btn btn-secondary" onClick={() => dispatch(addCart(v))}>
+            {" "}
+            장바구니 추가 <GoPlus />
+          </button>
+        </div>
+      ))}
       <Pagination currentPage={currentPage} totalPage={totalPage} setCurrentPage={setCurrentPage} />
     </div>
   );
@@ -86,40 +107,19 @@ export default function ProductList() {
 //@ CSS
 const Style = {
   Container: css`
+    align-items: center;
     margin-bottom: 4rem;
+    text-align: center;
   `,
   ItemBox: css`
     padding: 1rem;
-    margin: 2.2rem;
+    margin: 1rem;
     float: left;
     text-align: center;
+    position: unset;
   `,
 
   InnerItemBox: css`
     margin: 0 1.2rem;
-  `,
-
-  Btn: css`
-    margin: 0;
-    border: none;
-    cursor: pointer;
-    font-family: "Noto Sans KR", sans-serif;
-    font-size: var(--button-font-size, 1rem);
-    padding: var(--button-padding, 12px 16px);
-    border-radius: var(--button-radius, 8px);
-    background: var(--button-bg-color, #0d6efd);
-    color: var(--button-color, #ffffff);
-
-    &:active,
-    &:hover,
-    &:focus {
-      background: var(--button-hover-bg-color, #025ce2);
-    }
-
-    &:disabled {
-      cursor: default;
-      opacity: 0.5;
-      background: var(--button-bg-color, #025ce2);
-    }
   `,
 };

@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { css, Theme } from "@emotion/react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "src/store";
+import { useDispatch } from "react-redux";
 import { logOutAction } from "src/store/login/action";
 import Sidebar from "../sidebar";
 import SidebarContent from "../sidebar/sidebar-content";
@@ -13,29 +12,43 @@ export default function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loginState, setLoginState] = useState("");
-  const { name } = useSelector((store: RootState) => store.login);
 
   useEffect(() => {
     isLoginCheck() ? setLoginState("로그아웃") : setLoginState("로그인");
   }, []);
-
+  const currentUser = localStorage.getItem("login");
+  //@ts-ignore
+  const userInfo = JSON.parse(currentUser);
   const onClickHandler = () => {
     navigate("/");
   };
+
   return (
     <>
       {isLoginCheck() ? (
-        <div>
+        <div style={{ width: "100%", height: "100%" }}>
           <Link to="/">
             <div
               css={Style.btnStyle}
-              style={{ height: "30px", width: "80px" }}
+              style={{ height: "30px", width: "80px", display: "inline-block" }}
               onClick={() => dispatch(logOutAction())}
             >
               {loginState}
             </div>
-            {name}
+            {/* <button
+              type="button"
+              className="btn btn-outline-primary"
+              style={{
+                display: "inline-block",
+                padding: "0.5rem",
+                margin: "1rem 1rem",
+              }}
+              onClick={() => dispatch(logOutAction())}
+            >
+              {loginState}
+            </button> */}
           </Link>
+          <span style={{ textAlign: "center", padding: "0.5rem" }}>👟 {userInfo.id} 님이 접속중입니다. 👟</span>
           <div css={Style.Container}>
             <div css={Style.InnerContainer}>
               <div css={Style.Logo} style={{ fontSize: "2rem" }} onClick={onClickHandler}>
@@ -82,10 +95,10 @@ const Style = {
     max-width: 1024px;
     margin-left: auto;
     margin-right: auto;
-    background-color: #080808;
+    background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
     height: 100%;
     display: flex;
-    color: white;
+    color: #080808;
     padding: 20px;
     font-weight: 600;
     font-size: 20px;
@@ -116,21 +129,22 @@ const Style = {
     cursor: pointer;
     font-family: "Noto Sans KR", sans-serif;
     font-size: var(--button-font-size, 1rem);
-    padding: 5px;
-    background: var(--button-bg-color, tomato);
+    padding: 0.5rem;
+    background: var(--button-bg-color, #78c2ad);
     color: var(--button-color, #ffffff);
     text-align: center;
+    margin: 1rem 1rem;
 
     &:active,
     &:hover,
     &:focus {
-      background: var(--button-hover-bg-color, tomato);
+      background: var(--button-hover-bg-color, #78c2ad);
     }
 
     &:disabled {
       cursor: default;
       opacity: 0.5;
-      background: var(--button-bg-color, tomato);
+      background: var(--button-bg-color, #78c2ad);
     }
 
     --button-font-size: 0.875rem;

@@ -72,19 +72,19 @@ const Style = {
     font-size: var(--button-font-size, 1rem);
     padding: var(--button-padding, 12px 16px);
     border-radius: var(--button-radius, 8px);
-    background: var(--button-bg-color, tomato);
+    background: var(--button-bg-color, #ff7851);
     color: var(--button-color, #ffffff);
 
     &:active,
     &:hover,
     &:focus {
-      background: var(--button-hover-bg-color, tomato);
+      background: var(--button-hover-bg-color, #ff7851);
     }
 
     &:disabled {
       cursor: default;
       opacity: 0.5;
-      background: var(--button-bg-color, tomato);
+      background: var(--button-bg-color, #ff7851);
     }
 
     --button-font-size: 0.875rem;

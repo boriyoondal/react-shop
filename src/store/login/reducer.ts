@@ -34,7 +34,6 @@ export default function reducer(state: LoginState = initialState, action: LoginA
   switch (action.type) {
     case LOGIN_REQUEST:
       console.log("reducer/ login 요청");
-
       return {
         ...state,
         logInLoading: true,
@@ -44,11 +43,11 @@ export default function reducer(state: LoginState = initialState, action: LoginA
 
     case LOGIN_SUCCESS:
       console.log("reducer/ login 성공");
-
       return {
         ...state,
         logInLoading: false,
         logInDone: true,
+        id: action.data.id,
       };
 
     case LOGIN_FAIL:

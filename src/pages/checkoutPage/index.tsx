@@ -40,7 +40,7 @@ export default function CheckoutPage() {
       <br />
       <div style={{ textAlign: "center", width: "100%" }}>
         <div
-          style={{ backgroundColor: "#080808", width: "1024px", margin: "0 auto", padding: "10px", color: "#f8f8f8" }}
+          style={{ backgroundColor: "#ced4da", width: "1024px", margin: "0 auto", padding: "10px", color: "#f8f8f8" }}
         >
           ✔ 총 수량 : <span style={{ fontSize: "1.2rem" }}>{pcs}</span>개 <br />
           <br />
@@ -48,8 +48,11 @@ export default function CheckoutPage() {
             합계 : <span style={{ fontSize: "1.2rem" }}>{totalAmount}</span>원
           </div>
           <br />
-          <button css={Style.btnStyle} onClick={onClickCheckOut}>
+          {/* <button css={Style.btnStyle} onClick={onClickCheckOut}>
             결제하기
+          </button> */}
+          <button type="button" className="btn btn-warning" onClick={onClickCheckOut}>
+            PAYMENT
           </button>
         </div>
       </div>

@@ -54,19 +54,19 @@ const Style = {
     font-size: var(--button-font-size, 1rem);
     padding: var(--button-padding, 12px 12px);
     border-radius: var(--button-radius, 8px);
-    background: var(--button-bg-color, #0d6efd);
+    background: var(--button-bg-color, #78c2ad);
     color: var(--button-color, #ffffff);
 
     &:active,
     &:hover,
     &:focus {
-      background: var(--button-hover-bg-color, #025ce2);
+      background: var(--button-hover-bg-color, #78c2ad);
     }
 
     &:disabled {
       cursor: default;
       opacity: 0.5;
-      background: var(--button-bg-color, #025ce2);
+      background: var(--button-bg-color, #78c2ad);
     }
 
     --button-font-size: 0.875rem;

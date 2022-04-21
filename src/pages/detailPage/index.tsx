@@ -13,11 +13,12 @@ import Header from "src/components/templates/header";
 type Params = {
   id: string;
 };
+
 export default function DetailPage() {
   const dispatch = useDispatch();
-  const [product, setProduct] = useState<Product[]>([]);
   const { id } = useParams<Params>();
-  const { loading, products } = useSelector((store: RootState) => store.cart);
+  const [product, setProduct] = useState<Product[]>([]);
+  const { products } = useSelector((store: RootState) => store.cart);
   const prod_list = product;
   const prod_idx = prod_list.findIndex((i) => i.id == id);
   const prod = prod_list[prod_idx];
@@ -48,9 +49,16 @@ export default function DetailPage() {
                 <br />
                 제품번호 : {prod.id}
                 <br />
+                <br />
                 제품명 : {prod.title}
                 <br />
+                <br />
                 가격 : {prod.price}
+                <br />
+                <br />
+                사이즈
+                <select></select>
+                <br />
                 <br />
                 <button css={Style.Btn} onClick={() => dispatch(addCart(prod))}>
                   {" "}
@@ -77,7 +85,6 @@ const Style = {
     align-items: flex-start;
     margin: 1rem 1rem;
     max-width: 1024px;
-    border: 1px solid black;
     margin: auto;
     display: flex;
     justify-content: center;
@@ -87,7 +94,7 @@ const Style = {
   `,
   DetailContainer: css`
     text-align: center;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     display: inline-block;
     margin: 6rem 2rem;
     width: 400px;
@@ -100,18 +107,18 @@ const Style = {
     font-size: var(--button-font-size, 1rem);
     padding: var(--button-padding, 12px 16px);
     border-radius: var(--button-radius, 8px);
-    background: var(--button-bg-color, #0d6efd);
+    background: var(--button-bg-color, #78c2ad);
     color: var(--button-color, #ffffff);
     &:active,
     &:hover,
     &:focus {
-      background: var(--button-hover-bg-color, #025ce2);
+      background: var(--button-hover-bg-color, #78c2ad);
     }
 
     &:disabled {
       cursor: default;
       opacity: 0.5;
-      background: var(--button-bg-color, #025ce2);
+      background: var(--button-bg-color, #78c2ad);
     }
   `,
 };

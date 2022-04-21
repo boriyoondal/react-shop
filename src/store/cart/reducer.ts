@@ -1,5 +1,4 @@
 //@action
-
 import {
   addCart,
   deleteCart,
@@ -105,7 +104,7 @@ const reducer = (state = initialState, action: Action) => {
 
       localStorage.setItem("items", JSON.stringify([...state.products, newData]));
       localStorage.setItem("price", JSON.stringify(price + state.totalAmount));
-
+      // localStorage.setItem("login", JSON.stringify(action.data));
       const data = localStorage.getItem("items");
       const pricedata = localStorage.getItem("price");
 
