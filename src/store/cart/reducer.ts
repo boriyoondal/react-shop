@@ -5,17 +5,11 @@ import {
   clearCart,
   initCart,
   initPrice,
-  getPost,
-  getPostFail,
-  getPostSuccess,
   CLEAR_ITEM,
   INIT_ITEM,
   INIT_PRICE,
   ADD_ITEM,
   DELETE_ITEM,
-  GET_POST,
-  GET_POST_SUCCESS,
-  GET_POST_FAIL,
 } from "../cart/action";
 
 type Action =
@@ -23,10 +17,8 @@ type Action =
   | ReturnType<typeof deleteCart>
   | ReturnType<typeof clearCart>
   | ReturnType<typeof initCart>
-  | ReturnType<typeof initPrice>
-  | ReturnType<typeof getPost>
-  | ReturnType<typeof getPostFail>
-  | ReturnType<typeof getPostSuccess>;
+  | ReturnType<typeof initPrice>;
+
 interface State {
   products:
     | {
@@ -95,7 +87,6 @@ const reducer = (state = initialState, action: Action) => {
 
     case ADD_ITEM:
       console.log("ADD_ITEM");
-      //alert(action.product.title + "가 장바구니에 추가되었습니다.");
       //@ts-ignore
       let price = action.product.price.replace(",", "");
       price = parseInt(price);
@@ -104,7 +95,6 @@ const reducer = (state = initialState, action: Action) => {
 
       localStorage.setItem("items", JSON.stringify([...state.products, newData]));
       localStorage.setItem("price", JSON.stringify(price + state.totalAmount));
-      // localStorage.setItem("login", JSON.stringify(action.data));
       const data = localStorage.getItem("items");
       const pricedata = localStorage.getItem("price");
 
@@ -141,30 +131,6 @@ const reducer = (state = initialState, action: Action) => {
         products: [],
         totalAmount: 0,
         pcs: 0,
-      };
-
-    case GET_POST:
-      return {
-        ...state,
-        products: [],
-        loading: true,
-        error: null,
-      };
-
-    case GET_POST_SUCCESS:
-      return {
-        ...state,
-        products: [],
-        loading: false,
-        error: null,
-      };
-
-    case GET_POST_FAIL:
-      return {
-        ...state,
-        products: [],
-        loading: false,
-        error: Error,
       };
 
     default:

@@ -7,10 +7,10 @@ import Spinner from "src/components/spinner/spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { loginRequestAction } from "src/store/login/action";
 import { RootState } from "src/store";
-import isLoginCheck from "src/libs/isLogin";
+import isLoginCheck from "src/libs/isLoginCheck";
 
 export default function Login() {
-  const { id, logInLoading } = useSelector((store: RootState) => store.login);
+  const { logInLoading } = useSelector((store: RootState) => store.login);
   const [account, setAccount] = useState({
     id: "",
     pw: "",

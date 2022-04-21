@@ -10,9 +10,11 @@ export default function CheckoutPage() {
   const dispatch = useDispatch();
   const { products, pcs, totalAmount } = useSelector((store: RootState) => store.cart);
 
+  // Payment btn 클릭 시 임시적으로 event 발생시키는 handler
   const onClickCheckOut = () => {
     alert("결제하기");
   };
+
   return (
     <div>
       <Header />
@@ -26,7 +28,6 @@ export default function CheckoutPage() {
               backgroundColor: "#ffffff",
               width: "1024px",
               margin: "0 auto",
-              // border: "1px solid #808080",
             }}
           >
             <img src={v.image} style={{ width: 100, height: 100 }} alt={"prod-img"} />
@@ -48,9 +49,6 @@ export default function CheckoutPage() {
             합계 : <span style={{ fontSize: "1.2rem" }}>{totalAmount}</span>원
           </div>
           <br />
-          {/* <button css={Style.btnStyle} onClick={onClickCheckOut}>
-            결제하기
-          </button> */}
           <button type="button" className="btn btn-warning" onClick={onClickCheckOut}>
             PAYMENT
           </button>

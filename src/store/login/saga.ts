@@ -1,53 +1,12 @@
 import axios from "axios";
-import { APIGenerator } from "src/@types/types";
 import { all, fork, put, takeEvery, call } from "redux-saga/effects";
-import {
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  loginRequestAction,
-  loginSuccessAction,
-  loginFailAction,
-} from "./action";
+import { LOGIN_REQUEST, loginRequestAction, loginSuccessAction, loginFailAction } from "./action";
 
 export type LoginAction =
   | ReturnType<typeof loginRequestAction>
   | ReturnType<typeof loginSuccessAction>
   | ReturnType<typeof loginFailAction>;
 
-// const LoginAPI = async (data: { id: string; pw: string }) => {
-//   const { id, pw } = data;
-//   const response = await fetch("http://localhost:9999/api");
-
-//   if (response.ok) {
-//     const users = await response.json();
-//     const user = users.users.find((user: any) => user.id === id);
-
-//     console.log(user);
-//     if (!user || user.pw !== pw) {
-//       console.log("로그인 실패");
-//       throw new Error("로그인 일치 정보 없음");
-//     }
-//     return user;
-//   }
-//   throw new Error("서버 통신 에러");
-// };
-
-// export const LoginAPI = async (data: { id: string; pw: string }) => {
-//   const { id, pw } = data;
-//   const res = await fetch("http://localhost:9999/api");
-//   const getData = await res.json();
-//   // const dataSet = JSON.parse(data);
-//   // console.log(dataSet);
-//   if (res.ok) {
-//     const user = getData.users.find((user: any) => user.users.id === id);
-//     console.log(user);
-//     if (!user || user.pw !== pw) {
-//       console.log("로그인 실패");
-//     }
-//     return user;
-//   }
-// };
 export const LoginAPI = (data: { id: string; pw: string }) => {
   const { id, pw } = data;
   return axios
@@ -66,23 +25,6 @@ export const LoginAPI = (data: { id: string; pw: string }) => {
   // return axios.post("http://localhost:9999/api", data);
 };
 
-// function* login(action: ReturnType<typeof loginRequestAction>) {
-//   try {
-//     console.log("saga/login");
-//     const result: APIGenerator = yield call(LoginAPI, action.data);
-//     const { data } = result;
-//     console.log(result);
-//     yield put(
-//       loginSuccessAction({
-//         id: data.users.id,
-//       }),
-//     );
-//     localStorage.setItem("login", JSON.stringify(action.data));
-//   } catch (error: unknown) {
-//     console.log("saga/loginfail");
-//     yield put(loginFailAction(error));
-//   }
-// }
 type User = {
   user: [
     {
@@ -91,6 +33,7 @@ type User = {
     },
   ];
 };
+
 function* login(action: ReturnType<typeof loginRequestAction>) {
   try {
     const id = action.data.id;

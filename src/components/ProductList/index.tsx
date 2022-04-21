@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Product } from "src/@types/types";
 import { addCart } from "src/store/cart/action";
 import { css } from "@emotion/react";
 import { GoPlus } from "react-icons/go";
-import { RiHeartAddLine } from "react-icons/ri";
 import Pagination from "src/components/pagination";
 import "bootstrap/dist/css/bootstrap.min.css";
 import API from "src/API";
@@ -15,7 +14,6 @@ const ITEMS_PER_PAGE = 6;
 export default function ProductList() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const { value } = useSelector((store: RootState) => store.cart);
   //@pagination/state
   const [products, setProducts] = useState<Product[]>([]); // 총 게시물 data
   const [startPage, setStartPage] = useState(1);
@@ -23,7 +21,6 @@ export default function ProductList() {
   const [currentPage, setCurrentPage] = useState(1);
 
   //* 서버에서 data 가져오기
-
   // useEffect(() => {
   //   async function fetchData() {
   //     const res = await axios.get("http://localhost:9999/api");
@@ -52,32 +49,7 @@ export default function ProductList() {
     <div css={Style.Container}>
       <div>
         <h2 style={{ textAlign: "center", marginTop: "2rem", fontSize: "1.6rem" }}>SHOES LIST</h2>
-
         {/* 현재 페이지 데이터 slice */}
-        {/* {currentPageData.map((v, i) => (
-          <article key={i} css={Style.ItemBox}>
-            <div
-              css={Style.InnerItemBox}
-              onClick={() => {
-                navigate(`/product/${i + 1}`); // url 변경, 동적라우팅
-              }}
-            >
-              <img src={v.image} style={{ width: 200, height: 200, display: "inline-block" }} />
-              <p>{v.id}</p>
-              <p>{v.title}</p>
-              <p>{v.price}</p>
-              <br />
-              <div style={{ fontSize: "1.2rem" }}>
-                <RiHeartAddLine size="24" color="tomato" />
-              </div>
-              <br />
-            </div>{" "}
-            <button type="button" className="btn btn-secondary" onClick={() => dispatch(addCart(v))}>
-              {" "}
-              장바구니 추가 <GoPlus />
-            </button>
-          </article>
-        ))}*/}
       </div>
       {currentPageData.map((v, i) => (
         <div className="card" css={Style.ItemBox} key={i}>

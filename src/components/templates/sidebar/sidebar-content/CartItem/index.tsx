@@ -6,6 +6,8 @@ import { css } from "@emotion/react";
 export default function CartItem() {
   //@redux
   const dispatch = useDispatch();
+
+  //localStorage에 저장된 상태의 products 목록을 가져오기
   const { products } = useSelector((store: RootState) => store.cart);
 
   return (

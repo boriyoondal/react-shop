@@ -6,9 +6,6 @@ export const DELETE_ITEM = "DELETE_ITEM" as const; // 항목 삭제
 export const CLEAR_ITEM = "CLEAR_ITEM" as const; // 전체 항목 삭제
 export const INIT_ITEM = "INIT_ITEM" as const; // 최초에 localstorage 에 내가 저장한 아이템이 있는지?
 export const INIT_PRICE = "INIT_PRICE" as const; // 장바구니 가격 localstorage에 저장
-export const GET_POST = "GET_POST" as const;
-export const GET_POST_SUCCESS = "GET_POST_SUCCESS" as const;
-export const GET_POST_FAIL = "GET_POST_FAIL" as const;
 
 //@Action
 export const addCart = (product: Product) => ({ type: ADD_ITEM, product });
@@ -16,6 +13,3 @@ export const deleteCart = (product: Product) => ({ type: DELETE_ITEM, product })
 export const clearCart = () => ({ type: CLEAR_ITEM });
 export const initCart = () => ({ type: INIT_ITEM });
 export const initPrice = () => ({ type: INIT_PRICE });
-export const getPost = (productId: string) => ({ type: GET_POST, productId });
-export const getPostSuccess = () => ({ type: GET_POST_SUCCESS });
-export const getPostFail = (error: unknown) => ({ type: GET_POST_FAIL, error });

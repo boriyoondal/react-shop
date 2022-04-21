@@ -6,19 +6,24 @@ import { useDispatch } from "react-redux";
 import { logOutAction } from "src/store/login/action";
 import Sidebar from "../sidebar";
 import SidebarContent from "../sidebar/sidebar-content";
-import isLoginCheck from "src/libs/isLogin";
+import isLoginCheck from "src/libs/isLoginCheck";
 
 export default function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loginState, setLoginState] = useState("");
 
+  //Login 상태확인
   useEffect(() => {
     isLoginCheck() ? setLoginState("로그아웃") : setLoginState("로그인");
   }, []);
+
+  //로그인한 User를 찾기 위해 localStorage의 key가 login 인 value 가져오기
   const currentUser = localStorage.getItem("login");
   //@ts-ignore
   const userInfo = JSON.parse(currentUser);
+
+  // click 시 main으로 보내기 위한 handler
   const onClickHandler = () => {
     navigate("/");
   };
@@ -35,18 +40,6 @@ export default function Header() {
             >
               {loginState}
             </div>
-            {/* <button
-              type="button"
-              className="btn btn-outline-primary"
-              style={{
-                display: "inline-block",
-                padding: "0.5rem",
-                margin: "1rem 1rem",
-              }}
-              onClick={() => dispatch(logOutAction())}
-            >
-              {loginState}
-            </button> */}
           </Link>
           <span style={{ textAlign: "center", padding: "0.5rem" }}>👟 {userInfo.id} 님이 접속중입니다. 👟</span>
           <div css={Style.Container}>
