@@ -1,6 +1,6 @@
 import React from "react";
 import { css } from "@emotion/react";
-import ProductList from "../../ProductList";
+import ProductList from "../../productList";
 
 export default function Body() {
   return (

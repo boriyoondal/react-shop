@@ -21,8 +21,6 @@ export const LoginAPI = (data: { id: string; pw: string }) => {
     .catch((error) => {
       console.log(error + "로그인 실패");
     });
-  // console.log(data);
-  // return axios.post("http://localhost:9999/api", data);
 };
 
 type User = {

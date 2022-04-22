@@ -45,7 +45,7 @@ export default function Sidebar({ width, children }: SideType) {
         onClick={() => toggleMenu(isOpen)}
         css={Style.Togglemenu}
         style={{
-          transform: xPosition < 0 === true ? `translate(${width}px, -10vh)` : `translate(${0}px, -10vh)`,
+          transform: xPosition < 0 === true ? `translate(${width}px, -15vh)` : `translate(${0}px, -15vh)`,
           marginLeft: "1rem",
         }}
       >

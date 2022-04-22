@@ -7,6 +7,7 @@ import { logOutAction } from "src/store/login/action";
 import Sidebar from "../sidebar";
 import SidebarContent from "../sidebar/sidebar-content";
 import isLoginCheck from "src/libs/isLoginCheck";
+import ToggleMenu from "src/components/toggleMenu";
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -41,11 +42,12 @@ export default function Header() {
               {loginState}
             </div>
           </Link>
-          <span style={{ textAlign: "center", padding: "0.5rem" }}>👟 {userInfo.id} 님이 접속중입니다. 👟</span>
+          {/* <span style={{ textAlign: "center", padding: "0.5rem" }}>👟 {userInfo.id} 님이 접속중입니다. 👟</span> */}
           <div css={Style.Container}>
+            <ToggleMenu />
             <div css={Style.InnerContainer}>
-              <div css={Style.Logo} style={{ fontSize: "2rem" }} onClick={onClickHandler}>
-                SHOPPING CART
+              <div css={Style.Logo} style={{ fontSize: "3rem", marginBottom: "5rem" }} onClick={onClickHandler}>
+                {userInfo.id}의 🛒
               </div>
             </div>
             <Sidebar width={440}>
@@ -61,6 +63,11 @@ export default function Header() {
             </div>
           </Link>
           <div css={Style.Container}>
+            🔔
+            <span style={{ textAlign: "center", padding: "0.6rem" }}>
+              <br />
+              {loginState}을 해주세요
+            </span>
             <div css={Style.InnerContainer}>
               <div css={Style.Logo} style={{ fontSize: "2rem" }} onClick={onClickHandler}>
                 SHOPPING CART
@@ -84,6 +91,7 @@ const Style = {
     background-color: #f0f0f0;
     height: 72px;
   `,
+
   InnerContainer: (theme: Theme) => css`
     max-width: 1024px;
     margin-left: auto;

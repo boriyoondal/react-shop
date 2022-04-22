@@ -12,6 +12,7 @@ export default function CartItem() {
 
   return (
     <div>
+      <div style={{ marginBottom: "1.6rem", fontSize: "1.6rem" }}> ✅ SHOPPING CART</div>
       {products.length >= 1 ? (
         products.map((v, i) => (
           <div key={i} css={Style.DivStyle}>

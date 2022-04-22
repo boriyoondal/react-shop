@@ -48,7 +48,7 @@ const initialState: State = {
 const reducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case INIT_ITEM:
-      console.log("init");
+      console.log("init_items");
       const storage = localStorage.getItem("items");
       if (!!storage !== false) {
         const data:
@@ -95,8 +95,9 @@ const reducer = (state = initialState, action: Action) => {
 
       localStorage.setItem("items", JSON.stringify([...state.products, newData]));
       localStorage.setItem("price", JSON.stringify(price + state.totalAmount));
-      const data = localStorage.getItem("items");
-      const pricedata = localStorage.getItem("price");
+
+      localStorage.getItem("items");
+      localStorage.getItem("price");
 
       return {
         ...state,

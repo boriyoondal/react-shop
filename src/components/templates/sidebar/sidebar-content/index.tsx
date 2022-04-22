@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "src/store";
 import { Link } from "react-router-dom";
 import { css, Theme } from "@emotion/react";
-import CartList from "./CartList";
+import CartItem from "./sidebar-cartItem";
 
 export default function SidebarContent() {
   const { totalAmount, pcs, products } = useSelector((store: RootState) => store.cart);
@@ -21,7 +21,7 @@ export default function SidebarContent() {
   return (
     <div css={Style.Container}>
       <div css={Style.InnerContainer}>
-        <CartList />
+        <CartItem />
         <br />
         <div css={Style.CartCss}>
           ✔ 수량 : <span style={{ fontSize: "1.2rem" }}>{qty}</span>개 <br />

@@ -4,7 +4,6 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 // Redux-saga
 import createSagaMiddleware from "redux-saga";
-
 import rootReducer from "./rootReducer";
 import rootSaga from "./rootsaga";
 

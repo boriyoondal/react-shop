@@ -6,6 +6,7 @@ import { RootState } from "src/store";
 import { css } from "@emotion/react";
 import { addCart } from "src/store/cart/action";
 import { GoPlus } from "react-icons/go";
+import { IoIosHeart } from "react-icons/io";
 import API from "src/API";
 import Footer from "src/components/templates/footer";
 import Header from "src/components/templates/header";
@@ -47,10 +48,10 @@ export default function DetailPage() {
               <img src={prod.image} height="400px" />
               <div css={Style.DetailContainer}>
                 <br />
-                제품번호 : {prod.id}
+                <span style={{ fontSize: "3rem", fontWeight: "bold" }}>{prod.id}</span>
                 <br />
                 <br />
-                제품명 : {prod.title}
+                <span style={{ fontSize: "2rem", fontWeight: "300", boxSizing: "border-box" }}>{prod.title}</span>
                 <br />
                 <br />
                 가격 : {prod.price}
@@ -63,6 +64,10 @@ export default function DetailPage() {
                 <button css={Style.Btn} onClick={() => dispatch(addCart(prod))}>
                   {" "}
                   장바구니 추가 <GoPlus />{" "}
+                </button>{" "}
+                <button css={Style.Btn}>
+                  {" "}
+                  <IoIosHeart />{" "}
                 </button>
               </div>
             </div>
@@ -76,7 +81,7 @@ export default function DetailPage() {
 
 const Style = {
   Container: css`
-    padding: 60px 0 0 0;
+    padding: 3rem 0 0 0;
     width: 100%;
     height: 100%;
     z-index: 1;

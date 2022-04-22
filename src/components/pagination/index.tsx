@@ -35,7 +35,8 @@ export default function Pagination(props: Props) {
         </button>
 
         {MovePagination(currentPage, totalPage, PAGES_PER_LIST).map((i) => (
-          <div
+          <ul
+            className="pagination"
             key={i}
             css={Style.innerContainer}
             onClick={() => {
@@ -44,16 +45,18 @@ export default function Pagination(props: Props) {
               setCurrentPage(i);
             }}
           >
-            <button
+            <li
+              className="page-link"
               onClick={setCurrentPage}
               style={{
+                color: "white",
                 backgroundColor: currentPage === i ? "#080808" : "#f0f0f0",
               }}
-              css={Style.CircleBtn}
+              // css={Style.CircleBtn}
             >
               {i}
-            </button>
-          </div>
+            </li>
+          </ul>
         ))}
         <button css={Style.ArrowBtn} onClick={changeNumbersForward} disabled={currentPage === totalPage}>
           <HiOutlineChevronRight />
@@ -81,18 +84,18 @@ const Style = {
     display: inline-block;
     margin: 0 2.4rem;
   `,
-  CircleBtn: css`
-    box-sizing: content-box;
-    outline: none;
-    padding: 10px;
-    cursor: pointer;
-    overflow: hidden;
-    border: none;
-    -webkit-border-radius: 10%;
-    border-radius: 10%;
-    color: rgba(255, 255, 255, 0.9);
-    text-align: center;
-  `,
+  // CircleBtn: css`
+  //   box-sizing: content-box;
+  //   outline: none;
+  //   padding: 10px;
+  //   cursor: pointer;
+  //   overflow: hidden;
+  //   border: none;
+  //   -webkit-border-radius: 10%;
+  //   border-radius: 10%;
+  //   color: rgba(255, 255, 255, 0.9);
+  //   text-align: center;
+  // `,
   ArrowBtn: css`
     box-sizing: content-box;
     outline: none;
