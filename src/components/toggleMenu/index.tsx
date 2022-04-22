@@ -47,7 +47,7 @@ const Style = {
     height: 200px;
     position: absolute;
     right: 0;
-    transition: 1s;
+    transition: 1s ease;
     z-index: 9999;
     padding: 40px 20px;
     box-shadow: 2px 3px 3px 2px rgb(0 0 0 / 10%);
@@ -58,7 +58,7 @@ const Style = {
     height: 200px;
     position: absolute;
     right: -376px;
-    transition: 1s;
+    transition: 1s ease;
     border: 1px solid black;
     display: none;
   `,

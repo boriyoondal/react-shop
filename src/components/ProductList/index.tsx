@@ -48,7 +48,7 @@ export default function ProductList() {
   return (
     <div css={Style.Container}>
       <div>
-        <h2 style={{ textAlign: "center", marginTop: "2rem", fontSize: "1.6rem" }}>SHOES LIST</h2>
+        {/* <h2 style={{ textAlign: "center", marginTop: "2rem", fontSize: "1.6rem" }}>SHOES LIST</h2> */}
         {/* 현재 페이지 데이터 slice */}
       </div>
       {currentPageData.map((v, i) => (

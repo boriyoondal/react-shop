@@ -21,23 +21,28 @@ export default function CheckoutPage() {
       <br />
       <div style={{ textAlign: "center", fontSize: "2.4rem" }}> CHECK OUT </div>
       <br />
-      {products.map((v, i) => (
-        <div key={i} style={{ textAlign: "center", width: "100%" }}>
-          <div
-            style={{
-              backgroundColor: "#ffffff",
-              width: "1024px",
-              margin: "0 auto",
-            }}
-          >
-            <img src={v.image} style={{ width: 100, height: 100 }} alt={"prod-img"} />
-            <br />
-            상품명 : {v.title}
-            <br />
-            가격 : {v.price} <button onClick={() => dispatch(deleteCart(v))}>X</button>{" "}
+      {products.length >= 1 ? (
+        products.map((v, i) => (
+          <div key={i} style={{ textAlign: "center", width: "100%" }}>
+            <div
+              style={{
+                backgroundColor: "#ffffff",
+                width: "1024px",
+                margin: "0 auto",
+              }}
+            >
+              <img src={v.image} style={{ width: 100, height: 100 }} alt={"prod-img"} />
+              <br />
+              상품명 : {v.title}
+              <br />
+              가격 : {v.price} <button onClick={() => dispatch(deleteCart(v))}>X</button>{" "}
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <div style={{ textAlign: "center", fontSize: "2rem", fontWeight: "600" }}> 장바구니를 채워주세요! </div>
+      )}
+
       <br />
       <div style={{ textAlign: "center", width: "100%" }}>
         <div

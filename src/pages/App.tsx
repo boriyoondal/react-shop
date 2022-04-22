@@ -18,9 +18,6 @@ export default function App() {
 
   useEffect(() => {
     dispatch(initCart());
-  }, []);
-
-  useEffect(() => {
     dispatch(initPrice());
   }, []);
 

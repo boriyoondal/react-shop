@@ -29,14 +29,13 @@ export default function Pagination(props: Props) {
 
   return (
     <div css={Style.Container}>
-      <div style={{ textAlign: "center" }}>
+      <div style={{ alignItems: "center" }}>
         <button css={Style.ArrowBtn} onClick={changeNumbersBackward} disabled={currentPage === 1}>
           <HiOutlineChevronLeft />
         </button>
 
         {MovePagination(currentPage, totalPage, PAGES_PER_LIST).map((i) => (
           <ul
-            className="pagination"
             key={i}
             css={Style.innerContainer}
             onClick={() => {
@@ -52,7 +51,7 @@ export default function Pagination(props: Props) {
                 color: "white",
                 backgroundColor: currentPage === i ? "#080808" : "#f0f0f0",
               }}
-              // css={Style.CircleBtn}
+              css={Style.CircleBtn}
             >
               {i}
             </li>
@@ -84,24 +83,24 @@ const Style = {
     display: inline-block;
     margin: 0 2.4rem;
   `,
-  // CircleBtn: css`
-  //   box-sizing: content-box;
-  //   outline: none;
-  //   padding: 10px;
-  //   cursor: pointer;
-  //   overflow: hidden;
-  //   border: none;
-  //   -webkit-border-radius: 10%;
-  //   border-radius: 10%;
-  //   color: rgba(255, 255, 255, 0.9);
-  //   text-align: center;
-  // `,
+  CircleBtn: css`
+    margin-top: 2rem;
+    text-align: center;
+    box-sizing: content-box;
+    outline: none;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    -webkit-border-radius: 10%;
+    border-radius: 10%;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+  `,
   ArrowBtn: css`
     box-sizing: content-box;
     outline: none;
     padding: 10px;
     cursor: pointer;
-    overflow: hidden;
     border: none;
     -webkit-border-radius: 10%;
     border-radius: 10%;

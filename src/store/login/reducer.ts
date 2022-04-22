@@ -43,6 +43,7 @@ export default function reducer(state: LoginState = initialState, action: LoginA
 
     case LOGIN_SUCCESS:
       console.log("reducer/ login 성공");
+
       return {
         ...state,
         logInLoading: false,
@@ -61,7 +62,10 @@ export default function reducer(state: LoginState = initialState, action: LoginA
     case LOGOUT_ACTION:
       localStorage.removeItem("login");
       console.log("로그아웃");
-      return {};
+      return {
+        ...state,
+        id: null,
+      };
 
     default: {
       return {

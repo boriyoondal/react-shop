@@ -14,40 +14,44 @@ export default function Header() {
   const navigate = useNavigate();
   const [loginState, setLoginState] = useState("");
 
-  //Login 상태확인
-  useEffect(() => {
-    isLoginCheck() ? setLoginState("로그아웃") : setLoginState("로그인");
-  }, []);
-
   //로그인한 User를 찾기 위해 localStorage의 key가 login 인 value 가져오기
   const currentUser = localStorage.getItem("login");
   //@ts-ignore
   const userInfo = JSON.parse(currentUser);
 
-  // click 시 main으로 보내기 위한 handler
-  const onClickHandler = () => {
-    navigate("/");
-  };
+  //Login 상태확인
+  useEffect(() => {
+    isLoginCheck() ? setLoginState("LogOut") : setLoginState("LogIn");
+  }, [loginState]);
 
   return (
     <>
       {isLoginCheck() ? (
         <div style={{ width: "100%", height: "100%" }}>
+          {/* <span style={{ textAlign: "center", padding: "0.5rem" }}>👟 {userInfo.id} 님이 접속중입니다. 👟</span> */}
           <Link to="/">
             <div
               css={Style.btnStyle}
               style={{ height: "30px", width: "80px", display: "inline-block" }}
-              onClick={() => dispatch(logOutAction())}
+              onClick={(e) => {
+                e.stopPropagation();
+                dispatch(logOutAction());
+              }}
             >
               {loginState}
             </div>
           </Link>
-          {/* <span style={{ textAlign: "center", padding: "0.5rem" }}>👟 {userInfo.id} 님이 접속중입니다. 👟</span> */}
           <div css={Style.Container}>
             <ToggleMenu />
             <div css={Style.InnerContainer}>
-              <div css={Style.Logo} style={{ fontSize: "3rem", marginBottom: "5rem" }} onClick={onClickHandler}>
-                {userInfo.id}의 🛒
+              <div
+                css={Style.Logo}
+                style={{ marginBottom: "5rem" }}
+                onClick={() => {
+                  navigate("/");
+                }}
+              >
+                {userInfo.id} 의 🛒 Shopping Cart 🛒
               </div>
             </div>
             <Sidebar width={440}>
@@ -56,7 +60,7 @@ export default function Header() {
           </div>
         </div>
       ) : (
-        <div>
+        <div style={{ width: "100%", height: "100%" }}>
           <Link to="/login">
             <div css={Style.btnStyle} style={{ height: "30px", width: "80px" }}>
               {loginState}
@@ -69,8 +73,14 @@ export default function Header() {
               {loginState}을 해주세요
             </span>
             <div css={Style.InnerContainer}>
-              <div css={Style.Logo} style={{ fontSize: "2rem" }} onClick={onClickHandler}>
-                SHOPPING CART
+              <div
+                css={Style.Logo}
+                onClick={(e) => {
+                  // e.stopPropagation();
+                  navigate("/login");
+                }}
+              >
+                🛒 Shopping Cart 🛒
               </div>
             </div>
             <Sidebar width={440}>
@@ -112,6 +122,12 @@ const Style = {
   Logo: (theme: Theme) => css`
     display: flex;
     margin: 0 auto;
+    font-size: "2em";
+
+    ${theme.mobile} {
+      justify-content: flex-start;
+      font-size: "1em";
+    }
   `,
 
   List: css`

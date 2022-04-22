@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { css } from "@emotion/react";
 import Footer from "src/components/templates/footer";
@@ -10,7 +10,7 @@ import { RootState } from "src/store";
 import isLoginCheck from "src/libs/isLoginCheck";
 
 export default function Login() {
-  const { logInLoading } = useSelector((store: RootState) => store.login);
+  const { logInLoading, id } = useSelector((store: RootState) => store.login);
   const [account, setAccount] = useState({
     id: "",
     pw: "",
@@ -18,22 +18,25 @@ export default function Login() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // 로그인 체크
+  useEffect(() => {
+    isLoginCheck() ? navigate("/") : navigate("/login");
+  }, [id]);
 
-  const handleAccount = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAccount = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setAccount((prevState) => {
       return {
         ...prevState,
         [e.target.name]: e.target.value,
       };
     });
-  };
+  }, []);
 
   const onSubmitForm = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("login clicked");
+    // e.stopPropagation();
     const { id, pw } = account;
     dispatch(loginRequestAction({ id, pw }));
-    isLoginCheck() ? navigate("/") : navigate("/login");
   };
 
   return (
@@ -70,6 +73,7 @@ export default function Login() {
             value={account.pw}
             onChange={handleAccount}
             placeholder="🔒PW를 입력하세요"
+            autoComplete="on"
           />
           <button css={Style.LoginBtn} type="submit">
             LOGIN

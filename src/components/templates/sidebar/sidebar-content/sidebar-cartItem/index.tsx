@@ -34,7 +34,7 @@ export default function CartItem() {
         <div> 장바구니가 비어있습니다 </div>
       )}
       <br />
-      <button css={Style.btnStyle} onClick={() => dispatch(clearCart())}>
+      <button css={Style.btnStyle} style={{ padding: "1rem", fontSize: "1rem" }} onClick={() => dispatch(clearCart())}>
         장바구니 비우기
       </button>
     </div>

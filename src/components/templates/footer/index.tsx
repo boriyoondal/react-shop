@@ -5,10 +5,7 @@ export default function Footer() {
   return (
     <div css={Style.Container}>
       <div css={Style.InnerContainer}>
-        <p style={{ margin: "2rem 0" }}>
-          Copyright 2022 <br />
-          <br /> All right Reserved.
-        </p>
+        <p style={{ margin: "2rem 0", fontWeight: "600" }}>📌 Copyright 2022 All right Reserved</p>
       </div>
     </div>
   );

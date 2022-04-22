@@ -14,8 +14,9 @@ export const LoginAPI = (data: { id: string; pw: string }) => {
     .then((res) => {
       console.log(res);
       const users = res.data;
-      console.log(res.data);
-      const data = users.users.find((user: any) => user.id === id);
+      console.log(users);
+      const data = users.users.find((user: any) => user.id === id && user.pw === pw);
+      console.log(data);
       return data;
     })
     .catch((error) => {
@@ -24,12 +25,8 @@ export const LoginAPI = (data: { id: string; pw: string }) => {
 };
 
 type User = {
-  user: [
-    {
-      id: string;
-      pw: string;
-    },
-  ];
+  id: string;
+  pw: string;
 };
 
 function* login(action: ReturnType<typeof loginRequestAction>) {
@@ -37,13 +34,16 @@ function* login(action: ReturnType<typeof loginRequestAction>) {
     const id = action.data.id;
     const pw = action.data.pw;
     const result: User = yield call(LoginAPI, action.data);
-    console.log(result);
-    console.log("saga/loginSuccess");
-    yield put(loginSuccessAction({ id, pw }));
-    localStorage.setItem("login", JSON.stringify(action.data));
+
+    if (result.id === id && result.pw === pw) {
+      yield put(loginSuccessAction({ id, pw }));
+      localStorage.setItem("login", JSON.stringify(action.data));
+      console.log("saga/loginSuccess");
+    }
   } catch (error: unknown) {
     console.log("saga/loginfail");
     yield put(loginFailAction(error));
+    alert("로그인 정보를 확인해주세요");
   }
 }
 // saga 합치기
