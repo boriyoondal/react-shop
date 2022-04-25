@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { css, Theme } from "@emotion/react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+//redux
 import { useDispatch } from "react-redux";
 import { logOutAction } from "src/store/login/action";
+//css
+import { css, Theme } from "@emotion/react";
+//import components
 import Sidebar from "../sidebar";
 import SidebarContent from "../sidebar/sidebar-content";
 import isLoginCheck from "src/libs/isLoginCheck";
@@ -28,7 +31,6 @@ export default function Header() {
     <>
       {isLoginCheck() ? (
         <div style={{ width: "100%", height: "100%" }}>
-          {/* <span style={{ textAlign: "center", padding: "0.5rem" }}>👟 {userInfo.id} 님이 접속중입니다. 👟</span> */}
           <Link to="/">
             <div
               css={Style.btnStyle}
@@ -43,20 +45,20 @@ export default function Header() {
           </Link>
           <div css={Style.Container}>
             <ToggleMenu />
+            <Sidebar>
+              <SidebarContent />
+            </Sidebar>
             <div css={Style.InnerContainer}>
               <div
                 css={Style.Logo}
-                style={{ marginBottom: "5rem" }}
+                style={{ marginBottom: "11rem" }}
                 onClick={() => {
                   navigate("/");
                 }}
               >
-                {userInfo.id} 의 🛒 Shopping Cart 🛒
+                <span>{userInfo.id} 의 🛒 Shopping Cart 🛒</span>
               </div>
             </div>
-            <Sidebar width={440}>
-              <SidebarContent />
-            </Sidebar>
           </div>
         </div>
       ) : (
@@ -83,7 +85,7 @@ export default function Header() {
                 🛒 Shopping Cart 🛒
               </div>
             </div>
-            <Sidebar width={440}>
+            <Sidebar>
               <SidebarContent />
             </Sidebar>
           </div>
@@ -97,7 +99,6 @@ const Style = {
   Container: css`
     position: relative;
     width: 100%;
-    text-align: center;
     background-color: #f0f0f0;
     height: 72px;
   `,
@@ -122,7 +123,12 @@ const Style = {
   Logo: (theme: Theme) => css`
     display: flex;
     margin: 0 auto;
-    font-size: "2em";
+    /* font-size: "2em"; */
+    cursor: pin;
+
+    span {
+      font-size: "4em";
+    }
 
     ${theme.mobile} {
       justify-content: flex-start;

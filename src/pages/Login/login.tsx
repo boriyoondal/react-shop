@@ -1,13 +1,18 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { css } from "@emotion/react";
-import Footer from "src/components/templates/footer";
-import Header from "src/components/templates/header";
-import Spinner from "src/components/spinner/spinner";
+//redux
 import { useDispatch, useSelector } from "react-redux";
 import { loginRequestAction } from "src/store/login/action";
 import { RootState } from "src/store";
+//css
+import { css } from "@emotion/react";
+import { Theme } from "@emotion/react";
+//libs
 import isLoginCheck from "src/libs/isLoginCheck";
+//import components
+import Footer from "src/components/templates/footer";
+import Header from "src/components/templates/header";
+import Spinner from "src/components/spinner/spinner";
 
 export default function Login() {
   const { logInLoading, id } = useSelector((store: RootState) => store.login);
@@ -63,7 +68,7 @@ export default function Login() {
             value={account.id}
             name="id"
             onChange={handleAccount}
-            placeholder="🔑ID를 입력하세요"
+            placeholder="🔑ID"
           />
           <input
             css={Style.Input}
@@ -72,7 +77,7 @@ export default function Login() {
             name="pw"
             value={account.pw}
             onChange={handleAccount}
-            placeholder="🔒PW를 입력하세요"
+            placeholder="🔒PW"
             autoComplete="on"
           />
           <button css={Style.LoginBtn} type="submit">
@@ -86,22 +91,28 @@ export default function Login() {
 }
 
 const Style = {
-  Container: css`
+  Container: (theme: Theme) => css`
     position: relative;
     background-color: #fff;
     padding: 30px 60px;
     box-shadow: 4px 7px 1px 0px rgba(0, 0, 0, 0.2);
-    width: 600px;
+    max-width: 600px;
     height: 400px;
     text-align: center;
     margin: 1.2rem auto;
     color: black;
+    display: flex;
+    ${theme.mobile} {
+      /* justify-content: flex-start; */
+      width: 300px;
+      height: 200px;
+    }
   `,
-  LoginBtn: css`
+  LoginBtn: (theme: Theme) => css`
     font-size: 18px;
     font-weight: 700;
     line-height: 49px;
-    display: block;
+    text-align: center;
     width: 100%;
     height: 49px;
     margin: 16px 0 7px;
@@ -111,14 +122,26 @@ const Style = {
     border: none;
     border-radius: 0;
     background-color: #03c75a;
+    ${theme.mobile} {
+      /* justify-content: flex-start; */
+      text-justify: center;
+      margin: -5px 0 7px;
+    }
   `,
-  Input: css`
-    display: block;
+  Input: (theme: Theme) => css`
+    display: inline-block;
     border: none;
     border-bottom: 2px solid rgba(173, 173, 173, 0.4);
     padding: 5px 0;
     width: 100%;
     margin: 2.4rem 0;
     color: black;
+    ${theme.mobile} {
+      justify-content: flex-start;
+      text-justify: center;
+      margin: 1rem 0;
+      padding: 2px 0;
+      width: 100%;
+    }
   `,
 };

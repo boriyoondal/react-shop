@@ -20,7 +20,7 @@ export const LoginAPI = (data: { id: string; pw: string }) => {
       return data;
     })
     .catch((error) => {
-      console.log(error + "로그인 실패");
+      console.log(error + "API 접속 실패");
     });
 };
 
@@ -31,10 +31,11 @@ type User = {
 
 function* login(action: ReturnType<typeof loginRequestAction>) {
   try {
+    //action으로부터 id,pw data 값을 받고
     const id = action.data.id;
     const pw = action.data.pw;
     const result: User = yield call(LoginAPI, action.data);
-
+    //API data와 data의 id,pw값의 일치확인
     if (result.id === id && result.pw === pw) {
       yield put(loginSuccessAction({ id, pw }));
       localStorage.setItem("login", JSON.stringify(action.data));
@@ -48,7 +49,7 @@ function* login(action: ReturnType<typeof loginRequestAction>) {
 }
 // saga 합치기
 function* watchLogin() {
-  //EventListener
+  //EventListener의 역할
   console.log("saga/ login 감시 시작");
   yield takeEvery(LOGIN_REQUEST, login);
   //takeLastest => 액션 모니터링 함수, 특정 액션 타입의 가장 마지막에 디스패치된 액션만 처리

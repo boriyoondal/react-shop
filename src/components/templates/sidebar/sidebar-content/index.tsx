@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+//redux
 import { Product } from "src/@types/types";
 import { useSelector } from "react-redux";
 import { RootState } from "src/store";
+
 import { Link } from "react-router-dom";
 import { css, Theme } from "@emotion/react";
 import CartItem from "./sidebar-cartItem";
@@ -47,7 +49,6 @@ const Style = {
     max-width: 768px;
     height: 100%;
     color: white;
-    box-shadow: 2px 3px 3px 2px rgb(0 0 0 / 10%);
   `,
 
   InnerContainer: css`
@@ -57,6 +58,7 @@ const Style = {
     height: 100%;
     color: #080808;
     background-color: #f0f0f0;
+    z-index: 9999;
   `,
 
   CartCss: css`

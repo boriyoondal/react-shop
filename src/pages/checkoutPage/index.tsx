@@ -1,19 +1,17 @@
 import React from "react";
-import Header from "../../components/templates/header";
-import Footer from "../../components/templates/footer";
+//redux
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/store";
 import { deleteCart } from "src/store/cart/action";
-import { css } from "@emotion/react";
+//css
+import { css, Theme } from "@emotion/react";
+// import components
+import Header from "../../components/templates/header";
+import Footer from "../../components/templates/footer";
 
 export default function CheckoutPage() {
   const dispatch = useDispatch();
   const { products, pcs, totalAmount } = useSelector((store: RootState) => store.cart);
-
-  // Payment btn 클릭 시 임시적으로 event 발생시키는 handler
-  const onClickCheckOut = () => {
-    alert("결제하기");
-  };
 
   return (
     <div>
@@ -31,7 +29,7 @@ export default function CheckoutPage() {
                 margin: "0 auto",
               }}
             >
-              <img src={v.image} style={{ width: 100, height: 100 }} alt={"prod-img"} />
+              <img src={v.image} style={{ width: "100%", height: "100%" }} alt={"prod-img"} />
               <br />
               상품명 : {v.title}
               <br />
@@ -54,7 +52,13 @@ export default function CheckoutPage() {
             합계 : <span style={{ fontSize: "1.2rem" }}>{totalAmount}</span>원
           </div>
           <br />
-          <button type="button" className="btn btn-warning" onClick={onClickCheckOut}>
+          <button
+            type="button"
+            className="btn btn-warning"
+            onClick={() => {
+              alert(`${pcs}개의 상품 합계는 ${totalAmount}원 입니다.`);
+            }}
+          >
             PAYMENT
           </button>
         </div>

@@ -33,6 +33,7 @@ interface State {
   pcs: number;
   loading: boolean;
   error: unknown;
+  isOpen: boolean;
 }
 
 //@init
@@ -42,6 +43,7 @@ const initialState: State = {
   pcs: 0,
   loading: false,
   error: null,
+  isOpen: false,
 };
 
 //@reducer
@@ -105,6 +107,7 @@ const reducer = (state = initialState, action: Action) => {
         //@ts-ignore
         totalAmount: state.totalAmount + price,
         pcs: state.pcs + 1,
+        isOpen: true,
       };
 
     case DELETE_ITEM:

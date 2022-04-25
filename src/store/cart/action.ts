@@ -8,7 +8,7 @@ export const INIT_ITEM = "INIT_ITEM" as const; // 최초에 localstorage 에 내
 export const INIT_PRICE = "INIT_PRICE" as const; // 장바구니 가격 localstorage에 저장
 
 //@Action
-export const addCart = (product: Product) => ({ type: ADD_ITEM, product });
+export const addCart = (product: Product, isOpen: boolean) => ({ type: ADD_ITEM, product, isOpen });
 export const deleteCart = (product: Product) => ({ type: DELETE_ITEM, product });
 export const clearCart = () => ({ type: CLEAR_ITEM });
 export const initCart = () => ({ type: INIT_ITEM });

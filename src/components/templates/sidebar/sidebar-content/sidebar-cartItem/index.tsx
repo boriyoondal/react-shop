@@ -1,6 +1,8 @@
+//redux
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/store";
 import { clearCart, deleteCart } from "src/store/cart/action";
+//css
 import { css } from "@emotion/react";
 
 export default function CartItem() {

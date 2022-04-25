@@ -1,75 +1,62 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { css, Theme } from "@emotion/react";
-import { RootState } from "src/store";
 import { BsFillCartCheckFill } from "react-icons/bs";
+//redux
+import { RootState } from "src/store";
 import { useSelector } from "react-redux";
 
 type SideType = {
-  width: number;
   children: any;
 };
 
-export default function Sidebar({ width, children }: SideType) {
-  const { pcs } = useSelector((store: RootState) => store.cart);
+export default function Sidebar({ children }: SideType) {
+  const { pcs, isOpen } = useSelector((store: RootState) => store.cart);
   const [qty, setqty] = useState(0);
-  const [xPosition, setX] = useState(-width);
-  const [isOpen, setIsOpen] = useState(false);
+  const [previsOpen, setIsOpen] = useState(false);
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     setqty(pcs);
   }, [pcs]);
 
-  const toggleMenu = (isOpen: boolean) => {
-    // xPosition < 0 ? setX(0) : setX(-width);
-    if (xPosition < 0) {
-      setX(0);
-      setIsOpen(true);
-    } else {
-      if (xPosition === 0) {
-        setX(-width);
-        setIsOpen(false);
-      }
-    }
+  const toggleMenu = () => {
+    setIsOpen((previsOpen) => !previsOpen);
+    // setIsOpen((isOpen) => !isOpen);
   };
 
+  // const toggleMenu = useCallback(() => {
+  //   setIsOpen((previsOpen) => !previsOpen);
+  //   // setIsOpen((prev) => !prev);
+  // }, []);
+
   return (
-    <div
-      css={Style.Sidebar}
-      style={{
-        transform: `translatex(${xPosition}px)`,
-        width: width,
-      }}
-    >
-      <div
-        className="toggle"
-        onClick={() => toggleMenu(isOpen)}
-        css={Style.Togglemenu}
-        style={{
-          transform: xPosition < 0 === true ? `translate(${width}px, -15vh)` : `translate(${0}px, -15vh)`,
-          marginLeft: "1rem",
-        }}
-      >
+    <div css={Style.SideBarContainer}>
+      <div css={Style.SideBarInnerContainer}>
         <div css={Style.Circle}>{qty}</div>
-        <BsFillCartCheckFill className="icon" size="36" color="#080808" />
+        <BsFillCartCheckFill
+          onClick={() => toggleMenu()}
+          css={previsOpen ? Style.ShowToggle : Style.HideToggle}
+          className="icon"
+          size="36"
+          color="#080808"
+        />
       </div>
-      <div>{children}</div>
+      <div css={previsOpen ? Style.ShowMenu : Style.HideMenu}>{children}</div>
     </div>
   );
 }
 
 const Style = {
-  Sidebar: (theme: Theme) => css`
-    max-width: 1024px;
+  SideBarContainer: (theme: Theme) => css`
     width: 100%;
     height: 100%;
     transition: 0.4s ease;
-    background-color: #e3ecf1;
     top: 0;
     bottom: 0;
     right: 0;
     z-index: 9999;
 
-    ${theme.mobile} {
+    /* ${theme.mobile} {
       top: 0;
       bottom: 0;
       width: 640px;
@@ -81,8 +68,13 @@ const Style = {
       &.active {
         left: 0px;
         right: 0px;
-      }
-    }
+      } */
+    /* } */
+  `,
+  SideBarInnerContainer: css`
+    display: inline-block;
+    margin-top: -3rem;
+    margin-left: 1rem;
   `,
 
   Circle: css`
@@ -92,13 +84,42 @@ const Style = {
     background-color: tomato;
     color: #f0f0f0;
     padding: 3px;
+    text-align: center;
   `,
   Togglemenu: css`
     position: absolute;
     display: flex;
     outline: none;
-    z-index: 99;
+    z-index: 9999;
     margin-top: 2.2rem;
     background-color: none;
+  `,
+  ShowToggle: css`
+    /* margin-right: 19rem; */
+    display: inline-block;
+  `,
+  HideToggle: css`
+    position: relative;
+    z-index: 9999;
+  `,
+  ShowMenu: css`
+    /* transform: translate(376px); */
+    width: 440px;
+    height: auto;
+    position: absolute;
+    left: 0;
+    transition: 1s ease;
+    z-index: 9999;
+    padding: 40px 20px;
+    box-shadow: 2px 3px 3px 2px rgb(0 0 0 / 10%);
+    background-color: #f0f0f0;
+    text-align: center;
+  `,
+  HideMenu: css`
+    /* transform: translate(0px); */
+    position: absolute;
+    left: 0px;
+    transition: 1s ease;
+    display: none;
   `,
 };

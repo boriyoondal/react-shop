@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 // css
 import { Theme, css } from "@emotion/react";
-// import
+// pagination
 import MovePagination from "src/libs/paginationFunc";
 
 interface Props {
@@ -45,7 +45,6 @@ export default function Pagination(props: Props) {
             }}
           >
             <li
-              className="page-link"
               onClick={setCurrentPage}
               style={{
                 color: "white",
@@ -100,7 +99,6 @@ const Style = {
     box-sizing: content-box;
     outline: none;
     padding: 10px;
-    cursor: pointer;
     border: none;
     -webkit-border-radius: 10%;
     border-radius: 10%;

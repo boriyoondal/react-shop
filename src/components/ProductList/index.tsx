@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
+import API from "src/API";
 import { useNavigate } from "react-router-dom";
+//redux
 import { useDispatch } from "react-redux";
-import { Product } from "src/@types/types";
 import { addCart } from "src/store/cart/action";
+//type
+import { Product } from "src/@types/types";
+//css
 import { css } from "@emotion/react";
 import { GoPlus } from "react-icons/go";
-import Pagination from "src/components/pagination";
 import "bootstrap/dist/css/bootstrap.min.css";
-import API from "src/API";
+//pagination import
+import Pagination from "src/components/pagination";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -47,10 +51,7 @@ export default function ProductList() {
   const currentPageData = products.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
   return (
     <div css={Style.Container}>
-      <div>
-        {/* <h2 style={{ textAlign: "center", marginTop: "2rem", fontSize: "1.6rem" }}>SHOES LIST</h2> */}
-        {/* 현재 페이지 데이터 slice */}
-      </div>
+      {/* 현재 페이지 데이터 slice */}
       {currentPageData.map((v, i) => (
         <div className="card" css={Style.ItemBox} key={i}>
           <div
@@ -65,7 +66,7 @@ export default function ProductList() {
             <h4 className="card-title">{v.title}</h4>
             <p className="card-text">{v.price}</p>
           </div>
-          <button type="button" className="btn btn-secondary" onClick={() => dispatch(addCart(v))}>
+          <button type="button" className="btn btn-secondary" onClick={() => dispatch(addCart(v, true))}>
             {" "}
             장바구니 추가 <GoPlus />
           </button>
@@ -93,5 +94,6 @@ const Style = {
 
   InnerItemBox: css`
     margin: 0 1.2rem;
+    cursor: pointer;
   `,
 };

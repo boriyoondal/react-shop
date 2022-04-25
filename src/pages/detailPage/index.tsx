@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Product } from "src/@types/types";
+import API from "src/API";
+//redux
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/store";
-import { css } from "@emotion/react";
 import { addCart } from "src/store/cart/action";
+//type
+import { Product } from "src/@types/types";
+//css
+import { css, Theme } from "@emotion/react";
 import { GoPlus } from "react-icons/go";
 import { IoIosHeart } from "react-icons/io";
-import API from "src/API";
+//import components
 import Footer from "src/components/templates/footer";
 import Header from "src/components/templates/header";
 
@@ -19,7 +23,7 @@ export default function DetailPage() {
   const dispatch = useDispatch();
   const { id } = useParams<Params>();
   const [product, setProduct] = useState<Product[]>([]);
-  const { products } = useSelector((store: RootState) => store.cart);
+  const {} = useSelector((store: RootState) => store.cart);
   const prod_list = product;
   const prod_idx = prod_list.findIndex((i) => i.id == id);
   const prod = prod_list[prod_idx];
@@ -45,7 +49,7 @@ export default function DetailPage() {
         <div>
           <div css={Style.Container}>
             <div css={Style.InnerContainer}>
-              <img src={prod.image} height="400px" />
+              <img src={prod.image} height="400px" css={Style.Sizing} />
               <div css={Style.DetailContainer}>
                 <br />
                 <span style={{ fontSize: "3rem", fontWeight: "bold" }}>{prod.id}</span>
@@ -61,10 +65,12 @@ export default function DetailPage() {
                 <select></select>
                 <br />
                 <br />
-                <button css={Style.Btn} onClick={() => dispatch(addCart(prod))}>
+                <button css={Style.Btn} onClick={() => dispatch(addCart(prod, true))}>
                   {" "}
                   장바구니 추가 <GoPlus />{" "}
                 </button>{" "}
+                <br />
+                <br />
                 <button css={Style.Btn}>
                   {" "}
                   <IoIosHeart />{" "}
@@ -86,7 +92,7 @@ const Style = {
     height: 100%;
     z-index: 1;
   `,
-  InnerContainer: css`
+  InnerContainer: (theme: Theme) => css`
     align-items: flex-start;
     margin: 1rem 1rem;
     max-width: 1024px;
@@ -96,12 +102,16 @@ const Style = {
     height: 100%;
     background-color: #ffffff;
     z-index: -1;
+    ${theme.mobile} {
+      justify-content: flex-start;
+      padding: 3px;
+      display: flex;
+      margin: 0 auto;
+    }
   `,
   DetailContainer: css`
     text-align: center;
-    font-size: 1.2rem;
     display: inline-block;
-    margin: 6rem 2rem;
     width: 400px;
   `,
   Btn: css`
@@ -124,6 +134,14 @@ const Style = {
       cursor: default;
       opacity: 0.5;
       background: var(--button-bg-color, #78c2ad);
+    }
+  `,
+  Sizing: (theme: Theme) => css`
+    ${theme.mobile} {
+      justify-content: flex-start;
+      margin-top: 5rem;
+      width: 300px;
+      height: 300px;
     }
   `,
 };

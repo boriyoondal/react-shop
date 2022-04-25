@@ -1,3 +1,4 @@
+//pagination
 export default function MovePagination(currentPage: number, totalPage: number, PAGES_PER_LIST: number) {
   //   const finalTotalPage = [0, 0, 0, 0, 0];
 
