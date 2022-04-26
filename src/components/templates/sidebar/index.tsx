@@ -2,15 +2,16 @@ import React, { useState, useEffect, useCallback } from "react";
 import { css, Theme } from "@emotion/react";
 import { BsFillCartCheckFill } from "react-icons/bs";
 //redux
+// import { RootState } from "src/store";
+// import { useSelector } from "react-redux";
+import { useAppSelector } from "src/store/cart/hooks";
 import { RootState } from "src/store";
-import { useSelector } from "react-redux";
 
 type SideType = {
   children: any;
 };
-
 export default function Sidebar({ children }: SideType) {
-  const { pcs, isOpen } = useSelector((store: RootState) => store.cart);
+  const { pcs } = useAppSelector((store: RootState) => store.cart);
   const [qty, setqty] = useState(0);
   const [previsOpen, setIsOpen] = useState(false);
   const [toggle, setToggle] = useState(false);

@@ -39,7 +39,7 @@ export default function Pagination(props: Props) {
             key={i}
             css={Style.innerContainer}
             onClick={() => {
-              // currentpage
+              // currentpage Route
               navigate(`/?pages=${i}`);
               setCurrentPage(i);
             }}

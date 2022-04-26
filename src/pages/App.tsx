@@ -2,9 +2,10 @@ import React from "react";
 import { useEffect } from "react";
 
 // redux
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "src/store/cart/hooks";
 
-import { initCart, initPrice } from "src/store/cart/action";
+import { initCart, initPrice } from "src/store/cart/cartSlice";
+// import { initCart, initPrice } from "src/store/cart/action";
 import CheckoutPage from "src/pages/checkoutPage";
 
 // route
@@ -14,7 +15,7 @@ import Login from "./Login/login";
 import DetailPage from "./detailPage";
 
 export default function App() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(initCart());

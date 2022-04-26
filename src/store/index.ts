@@ -1,30 +1,50 @@
-// Redux
-import { createStore, applyMiddleware, compose } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
+// // Redux
+// import { configureStore } from "@reduxjs/toolkit";
 
-// Redux-saga
+// // Redux-saga
+// import createSagaMiddleware from "redux-saga";
+// import rootReducer from "./rootReducer";
+// import rootSaga from "./rootsaga";
+
+// // type
+// export type RootState = ReturnType<typeof store.getState>;
+//
+
+// const configureStore = () => {
+//   const sagaMiddleware = createSagaMiddleware();
+//   const middlewares = [sagaMiddleware];
+//   reducer: {},
+
+//   sagaMiddleware.run(rootSaga);
+//   return store;
+// };
+
+// const store = configureStore();
+
+// export default store;
+
+// redux/store.js
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
-import rootReducer from "./rootReducer";
+import cartSlice from "./cart/cartSlice";
+import loginSlice from "./login/loginSlice";
 import rootSaga from "./rootsaga";
 
-// type
-export type RootState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
-const configureStore = () => {
-  const sagaMiddleware = createSagaMiddleware();
-  const middlewares = [sagaMiddleware];
+const reducer = combineReducers({
+  cart: cartSlice,
+  login: loginSlice,
+});
 
-  const enhancer =
-    process.env.NODE_ENV === "production"
-      ? compose(applyMiddleware(...middlewares))
-      : composeWithDevTools(applyMiddleware(...middlewares));
+const sagaMiddleware = createSagaMiddleware();
 
-  const store = createStore(rootReducer, enhancer);
+const store = configureStore({
+  reducer: reducer,
+  middleware: [sagaMiddleware],
+});
 
-  sagaMiddleware.run(rootSaga);
-  return store;
-};
-
-const store = configureStore();
+sagaMiddleware.run(rootSaga); // Listener
 
 export default store;

@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 //redux
+// import { useDispatch } from "react-redux";
+// import { logOutAction } from "src/store/login/action";
 import { useDispatch } from "react-redux";
-import { logOutAction } from "src/store/login/action";
+import { logoutAction } from "src/store/login/loginSlice";
 //css
 import { css, Theme } from "@emotion/react";
 //import components
@@ -37,7 +39,7 @@ export default function Header() {
               style={{ height: "30px", width: "80px", display: "inline-block" }}
               onClick={(e) => {
                 e.stopPropagation();
-                dispatch(logOutAction());
+                dispatch(logoutAction());
               }}
             >
               {loginState}

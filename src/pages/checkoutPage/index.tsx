@@ -1,8 +1,12 @@
 import React from "react";
 //redux
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
+// import { RootState } from "src/store";
+// import { deleteCart } from "src/store/cart/action";
+
 import { RootState } from "src/store";
-import { deleteCart } from "src/store/cart/action";
+import { useAppDispatch, useAppSelector } from "src/store/cart/hooks";
+import { deleteCart } from "src/store/cart/cartSlice";
 //css
 import { css, Theme } from "@emotion/react";
 // import components
@@ -10,9 +14,8 @@ import Header from "../../components/templates/header";
 import Footer from "../../components/templates/footer";
 
 export default function CheckoutPage() {
-  const dispatch = useDispatch();
-  const { products, pcs, totalAmount } = useSelector((store: RootState) => store.cart);
-
+  const dispatch = useAppDispatch();
+  const { products, pcs, totalAmount } = useAppSelector((store: RootState) => store.cart);
   return (
     <div>
       <Header />
@@ -20,6 +23,7 @@ export default function CheckoutPage() {
       <div style={{ textAlign: "center", fontSize: "2.4rem" }}> CHECK OUT </div>
       <br />
       {products.length >= 1 ? (
+        //@ts-ignore
         products.map((v, i) => (
           <div key={i} style={{ textAlign: "center", width: "100%" }}>
             <div
@@ -29,7 +33,7 @@ export default function CheckoutPage() {
                 margin: "0 auto",
               }}
             >
-              <img src={v.image} style={{ width: "100%", height: "100%" }} alt={"prod-img"} />
+              <img src={v.image} style={{ width: "400px", height: "400px" }} alt={"prod-img"} />
               <br />
               상품명 : {v.title}
               <br />

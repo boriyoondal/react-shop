@@ -13,7 +13,7 @@ import { Provider } from "react-redux";
 import { ThemeProvider } from "@emotion/react";
 import Theme from "./styles/Theme";
 import GlobalStyle from "./styles/Global";
-import store from "./store";
+import store from "../src/store";
 
 ReactDOM.render(
   <React.StrictMode>

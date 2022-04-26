@@ -1,21 +1,25 @@
 //redux
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
+// import { RootState } from "src/store";
 import { RootState } from "src/store";
-import { clearCart, deleteCart } from "src/store/cart/action";
+import { useAppDispatch, useAppSelector } from "src/store/cart/hooks";
+import { deleteCart, clearCart } from "src/store/cart/cartSlice";
+// import { clearCart, deleteCart } from "src/store/cart/action";
 //css
 import { css } from "@emotion/react";
 
 export default function CartItem() {
   //@redux
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   //localStorage에 저장된 상태의 products 목록을 가져오기
-  const { products } = useSelector((store: RootState) => store.cart);
+  const { products } = useAppSelector((store: RootState) => store.cart);
 
   return (
     <div>
       <div style={{ marginBottom: "1.6rem", fontSize: "1.6rem" }}> ✅ SHOPPING CART</div>
       {products.length >= 1 ? (
+        //@ts-ignore
         products.map((v, i) => (
           <div key={i} css={Style.DivStyle}>
             <img src={v.image} style={{ width: 100, height: 100 }} alt={"prod-img"} />
@@ -29,6 +33,7 @@ export default function CartItem() {
             <button css={Style.btnStyle} onClick={() => dispatch(deleteCart(v))}>
               X
             </button>{" "}
+            {console.log(products)}
             <br />
           </div>
         ))

@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import API from "src/API";
 import { useNavigate } from "react-router-dom";
 //redux
-import { useDispatch } from "react-redux";
-import { addCart } from "src/store/cart/action";
+// import { useDispatch } from "react-redux";
+import { useAppDispatch } from "src/store/cart/hooks";
+// import { addCart } from "src/store/cart/action";
+import { addItem } from "src/store/cart/cartSlice";
 //type
 import { Product } from "src/@types/types";
 //css
@@ -16,7 +18,7 @@ import Pagination from "src/components/pagination";
 const ITEMS_PER_PAGE = 6;
 
 export default function ProductList() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   //@pagination/state
   const [products, setProducts] = useState<Product[]>([]); // 총 게시물 data
@@ -66,7 +68,7 @@ export default function ProductList() {
             <h4 className="card-title">{v.title}</h4>
             <p className="card-text">{v.price}</p>
           </div>
-          <button type="button" className="btn btn-secondary" onClick={() => dispatch(addCart(v, true))}>
+          <button type="button" className="btn btn-secondary" onClick={() => dispatch(addItem(v))}>
             {" "}
             장바구니 추가 <GoPlus />
           </button>

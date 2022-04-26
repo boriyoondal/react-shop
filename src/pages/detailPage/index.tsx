@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import API from "src/API";
 //redux
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
+// import { RootState } from "src/store";
+// import { addCart } from "src/store/cart/action";
 import { RootState } from "src/store";
-import { addCart } from "src/store/cart/action";
+import { useAppDispatch, useAppSelector } from "src/store/cart/hooks";
+import { addItem } from "src/store/cart/cartSlice";
 //type
 import { Product } from "src/@types/types";
 //css
@@ -20,10 +23,10 @@ type Params = {
 };
 
 export default function DetailPage() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { id } = useParams<Params>();
   const [product, setProduct] = useState<Product[]>([]);
-  const {} = useSelector((store: RootState) => store.cart);
+  const {} = useAppSelector((store: RootState) => store.cart);
   const prod_list = product;
   const prod_idx = prod_list.findIndex((i) => i.id == id);
   const prod = prod_list[prod_idx];
@@ -65,7 +68,7 @@ export default function DetailPage() {
                 <select></select>
                 <br />
                 <br />
-                <button css={Style.Btn} onClick={() => dispatch(addCart(prod, true))}>
+                <button css={Style.Btn} onClick={() => dispatch(addItem(prod))}>
                   {" "}
                   장바구니 추가 <GoPlus />{" "}
                 </button>{" "}

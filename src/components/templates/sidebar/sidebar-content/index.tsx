@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 //redux
 import { Product } from "src/@types/types";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { useAppSelector } from "src/store/cart/hooks";
 import { RootState } from "src/store";
+// import { RootState } from "src/store";
 
 import { Link } from "react-router-dom";
 import { css, Theme } from "@emotion/react";
 import CartItem from "./sidebar-cartItem";
 
 export default function SidebarContent() {
-  const { totalAmount, pcs, products } = useSelector((store: RootState) => store.cart);
+  const { totalAmount, pcs, products } = useAppSelector((store: RootState) => store.cart);
   const [price, setPrice] = useState(0);
   const [qty, setqty] = useState(0);
   const [item, setItem] = useState<Product[]>([]);

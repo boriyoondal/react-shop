@@ -1,8 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 //redux
-import { useDispatch, useSelector } from "react-redux";
-import { loginRequestAction } from "src/store/login/action";
+// import { useDispatch, useSelector } from "react-redux";
+// import { loginRequestAction } from "src/store/login/action";
+import { useAppDispatch, useAppSelector } from "src/store/cart/hooks";
+import { loginRequest } from "src/store/login/loginSlice";
 import { RootState } from "src/store";
 //css
 import { css } from "@emotion/react";
@@ -15,18 +17,14 @@ import Header from "src/components/templates/header";
 import Spinner from "src/components/spinner/spinner";
 
 export default function Login() {
-  const { logInLoading, id } = useSelector((store: RootState) => store.login);
+  const { logInLoading, id } = useAppSelector((store: RootState) => store.login);
   const [account, setAccount] = useState({
     id: "",
     pw: "",
   });
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  // 로그인 체크
-  useEffect(() => {
-    isLoginCheck() ? navigate("/") : navigate("/login");
-  }, [id]);
 
   const handleAccount = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setAccount((prevState) => {
@@ -41,9 +39,13 @@ export default function Login() {
     e.preventDefault();
     // e.stopPropagation();
     const { id, pw } = account;
-    dispatch(loginRequestAction({ id, pw }));
+    dispatch(loginRequest({ id, pw }));
+    console.log(id);
   };
-
+  // 로그인 체크
+  useEffect(() => {
+    isLoginCheck() ? navigate("/") : navigate("/login");
+  }, [id]);
   return (
     <div>
       {logInLoading && <Spinner />}
