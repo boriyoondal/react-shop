@@ -103,9 +103,10 @@ const Style = {
     position: relative;
     z-index: 9999;
   `,
-  ShowMenu: css`
+  ShowMenu: (theme: Theme) => css`
     /* transform: translate(376px); */
-    width: 440px;
+    max-width: 768px;
+    max-height: 1024px;
     height: auto;
     position: absolute;
     left: 0;
@@ -115,6 +116,9 @@ const Style = {
     box-shadow: 2px 3px 3px 2px rgb(0 0 0 / 10%);
     background-color: #f0f0f0;
     text-align: center;
+    ${theme.mobile} {
+      width: 100%;
+    }
   `,
   HideMenu: css`
     /* transform: translate(0px); */

@@ -3,10 +3,10 @@
 // import { RootState } from "src/store";
 import { RootState } from "src/store";
 import { useAppDispatch, useAppSelector } from "src/store/cart/hooks";
-import { deleteCart, clearCart } from "src/store/cart/cartSlice";
+import { deleteItem, clearCart } from "src/store/cart/cartSlice";
 // import { clearCart, deleteCart } from "src/store/cart/action";
 //css
-import { css } from "@emotion/react";
+import { css, Theme } from "@emotion/react";
 
 export default function CartItem() {
   //@redux
@@ -30,7 +30,7 @@ export default function CartItem() {
             {v.price}원
             <br />
             <br />
-            <button css={Style.btnStyle} onClick={() => dispatch(deleteCart(v))}>
+            <button css={Style.btnStyle} onClick={() => dispatch(deleteItem(v))}>
               X
             </button>{" "}
             {console.log(products)}
@@ -49,11 +49,16 @@ export default function CartItem() {
 }
 
 const Style = {
-  DivStyle: css`
+  DivStyle: (theme: Theme) => css`
     padding: 1rem;
     background-color: #f5f5f5;
     margin-bottom: 1.6rem;
     border: 1px solid #808080;
+    ${theme.mobile} {
+      /* justify-content: flex-start; */
+      width: 100%;
+      height: 100%;
+    }
   `,
 
   btnStyle: css`

@@ -6,7 +6,7 @@ import React from "react";
 
 import { RootState } from "src/store";
 import { useAppDispatch, useAppSelector } from "src/store/cart/hooks";
-import { deleteCart } from "src/store/cart/cartSlice";
+import { deleteItem } from "src/store/cart/cartSlice";
 //css
 import { css, Theme } from "@emotion/react";
 // import components
@@ -37,7 +37,7 @@ export default function CheckoutPage() {
               <br />
               상품명 : {v.title}
               <br />
-              가격 : {v.price} <button onClick={() => dispatch(deleteCart(v))}>X</button>{" "}
+              가격 : {v.price} <button onClick={() => dispatch(deleteItem(v))}>X</button>{" "}
             </div>
           </div>
         ))

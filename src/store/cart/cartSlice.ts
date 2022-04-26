@@ -82,7 +82,7 @@ export const cartSlice = createSlice({
       return state;
     },
 
-    deleteCart: (state = initialState, action: PayloadAction<Product>) => {
+    deleteItem: (state = initialState, action: PayloadAction<Product>) => {
       //@ts-ignore
       let reprice = action.payload.price.replace(",", "");
 
@@ -112,6 +112,6 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { initCart, initPrice, addItem, deleteCart, clearCart } = cartSlice.actions;
+export const { initCart, initPrice, addItem, deleteItem, clearCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

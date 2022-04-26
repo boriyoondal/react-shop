@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 //redux
 // import { useDispatch, useSelector } from "react-redux";
 // import { loginRequestAction } from "src/store/login/action";
+//rtk
 import { useAppDispatch, useAppSelector } from "src/store/cart/hooks";
 import { loginRequest } from "src/store/login/loginSlice";
 import { RootState } from "src/store";
@@ -46,6 +47,7 @@ export default function Login() {
   useEffect(() => {
     isLoginCheck() ? navigate("/") : navigate("/login");
   }, [id]);
+
   return (
     <div>
       {logInLoading && <Spinner />}

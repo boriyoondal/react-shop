@@ -58,7 +58,11 @@ export default function Header() {
                   navigate("/");
                 }}
               >
-                <span>{userInfo.id} 의 🛒 Shopping Cart 🛒</span>
+                <span style={{ textAlign: "center" }}>
+                  {userInfo.id} 의
+                  <br />
+                  🛒 Shopping Cart 🛒
+                </span>
               </div>
             </div>
           </div>
@@ -127,10 +131,6 @@ const Style = {
     margin: 0 auto;
     /* font-size: "2em"; */
     cursor: pin;
-
-    span {
-      font-size: "4em";
-    }
 
     ${theme.mobile} {
       justify-content: flex-start;
