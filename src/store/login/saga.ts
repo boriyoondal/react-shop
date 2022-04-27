@@ -1,7 +1,7 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { all, fork, put, takeEvery, call } from "redux-saga/effects";
-import { loginRequest, loginSuccess, loginFail, logoutAction } from "./loginSlice";
+import { loginRequest, loginSuccess, loginFail } from "./loginSlice";
 
 export const LoginAPI = (data: { id: string; pw: string }) => {
   const { id, pw } = data;
@@ -36,10 +36,10 @@ function* login(action: PayloadAction<User>) {
     if (result.id === id && result.pw === pw) {
       yield put(loginSuccess({ id, pw }));
       localStorage.setItem("login", JSON.stringify(action.payload));
-      console.log("saga/loginSuccess");
+      console.log("saga/ loginSuccess");
     }
   } catch (error: unknown) {
-    console.log("saga/loginfail");
+    console.log("saga/ loginfail");
     yield put(loginFail());
     alert("로그인 정보를 확인해주세요");
   }

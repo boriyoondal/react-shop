@@ -2,7 +2,7 @@
 // import { useDispatch, useSelector } from "react-redux";
 // import { RootState } from "src/store";
 import { RootState } from "src/store";
-import { useAppDispatch, useAppSelector } from "src/store/cart/hooks";
+import { useAppDispatch, useAppSelector } from "src/store/hooks";
 import { deleteItem, clearCart } from "src/store/cart/cartSlice";
 // import { clearCart, deleteCart } from "src/store/cart/action";
 //css
@@ -33,7 +33,6 @@ export default function CartItem() {
             <button css={Style.btnStyle} onClick={() => dispatch(deleteItem(v))}>
               X
             </button>{" "}
-            {console.log(products)}
             <br />
           </div>
         ))

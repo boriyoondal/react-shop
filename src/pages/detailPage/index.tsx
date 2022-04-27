@@ -6,7 +6,7 @@ import API from "src/API";
 // import { RootState } from "src/store";
 // import { addCart } from "src/store/cart/action";
 import { RootState } from "src/store";
-import { useAppDispatch, useAppSelector } from "src/store/cart/hooks";
+import { useAppDispatch, useAppSelector } from "src/store/hooks";
 import { addItem } from "src/store/cart/cartSlice";
 //type
 import { Product } from "src/@types/types";

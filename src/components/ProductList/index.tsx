@@ -3,7 +3,7 @@ import API from "src/API";
 import { useNavigate } from "react-router-dom";
 //redux
 // import { useDispatch } from "react-redux";
-import { useAppDispatch } from "src/store/cart/hooks";
+import { useAppDispatch } from "src/store/hooks";
 // import { addCart } from "src/store/cart/action";
 import { addItem } from "src/store/cart/cartSlice";
 //type

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 //redux
 import { Product } from "src/@types/types";
 // import { useSelector } from "react-redux";
-import { useAppSelector } from "src/store/cart/hooks";
+import { useAppSelector } from "src/store/hooks";
 import { RootState } from "src/store";
 // import { RootState } from "src/store";
 

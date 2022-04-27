@@ -91,7 +91,6 @@ export const cartSlice = createSlice({
         "items",
         JSON.stringify([...state.products.filter((product) => product.id !== action.payload.id)]),
       );
-      console.log(action.payload);
 
       state = {
         ...state,

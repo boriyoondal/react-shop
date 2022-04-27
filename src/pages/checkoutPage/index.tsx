@@ -4,11 +4,11 @@ import React from "react";
 // import { RootState } from "src/store";
 // import { deleteCart } from "src/store/cart/action";
 
+//rtk
 import { RootState } from "src/store";
-import { useAppDispatch, useAppSelector } from "src/store/cart/hooks";
+import { useAppDispatch, useAppSelector } from "src/store/hooks";
 import { deleteItem } from "src/store/cart/cartSlice";
-//css
-import { css, Theme } from "@emotion/react";
+
 // import components
 import Header from "../../components/templates/header";
 import Footer from "../../components/templates/footer";
@@ -16,6 +16,7 @@ import Footer from "../../components/templates/footer";
 export default function CheckoutPage() {
   const dispatch = useAppDispatch();
   const { products, pcs, totalAmount } = useAppSelector((store: RootState) => store.cart);
+
   return (
     <div>
       <Header />
@@ -46,6 +47,7 @@ export default function CheckoutPage() {
       )}
 
       <br />
+
       <div style={{ textAlign: "center", width: "100%" }}>
         <div
           style={{ backgroundColor: "#ced4da", width: "1024px", margin: "0 auto", padding: "10px", color: "#f8f8f8" }}
@@ -71,33 +73,3 @@ export default function CheckoutPage() {
     </div>
   );
 }
-
-const Style = {
-  btnStyle: css`
-    margin: 0;
-    border: none;
-    cursor: pointer;
-    font-family: "Noto Sans KR", sans-serif;
-    font-size: var(--button-font-size, 1rem);
-    padding: var(--button-padding, 12px 16px);
-    border-radius: var(--button-radius, 8px);
-    background: var(--button-bg-color, tomato);
-    color: var(--button-color, #ffffff);
-
-    &:active,
-    &:hover,
-    &:focus {
-      background: var(--button-hover-bg-color, tomato);
-    }
-
-    &:disabled {
-      cursor: default;
-      opacity: 0.5;
-      background: var(--button-bg-color, tomato);
-    }
-
-    --button-font-size: 0.875rem;
-    --button-padding: 8px 12px;
-    --button-radius: 4px;
-  `,
-};

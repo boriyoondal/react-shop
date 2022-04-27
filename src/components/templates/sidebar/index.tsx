@@ -4,7 +4,7 @@ import { BsFillCartCheckFill } from "react-icons/bs";
 //redux
 // import { RootState } from "src/store";
 // import { useSelector } from "react-redux";
-import { useAppSelector } from "src/store/cart/hooks";
+import { useAppSelector } from "src/store/hooks";
 import { RootState } from "src/store";
 
 type SideType = {
