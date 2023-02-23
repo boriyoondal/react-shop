@@ -13,6 +13,14 @@ import { deleteItem } from "src/store/cart/cartSlice";
 import Header from "../../components/templates/header";
 import Footer from "../../components/templates/footer";
 
+interface type {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  image: string;
+}
+
 export default function CheckoutPage() {
   const dispatch = useAppDispatch();
   const { products, pcs, totalAmount } = useAppSelector((store: RootState) => store.cart);
@@ -21,11 +29,10 @@ export default function CheckoutPage() {
     <div>
       <Header />
       <br />
-      <div style={{ textAlign: "center", fontSize: "2.4rem" }}> CHECK OUT </div>
+      <div style={{ textAlign: "center", fontSize: "2.4rem" }}> Check Out! </div>
       <br />
       {products.length >= 1 ? (
-        //@ts-ignore
-        products.map((v, i) => (
+        products.map((v: type, i: number) => (
           <div key={i} style={{ textAlign: "center", width: "100%" }}>
             <div
               style={{
@@ -36,9 +43,9 @@ export default function CheckoutPage() {
             >
               <img src={v.image} style={{ width: "400px", height: "400px" }} alt={"prod-img"} />
               <br />
-              상품명 : {v.title}
+              상품명: {v.title}
               <br />
-              가격 : {v.price} <button onClick={() => dispatch(deleteItem(v))}>X</button>{" "}
+              가격: {v.price} <button onClick={() => dispatch(deleteItem(v))}>X</button>{" "}
             </div>
           </div>
         ))
@@ -52,10 +59,10 @@ export default function CheckoutPage() {
         <div
           style={{ backgroundColor: "#ced4da", width: "1024px", margin: "0 auto", padding: "10px", color: "#f8f8f8" }}
         >
-          ✔ 총 수량 : <span style={{ fontSize: "1.2rem" }}>{pcs}</span>개 <br />
+          ✔ 총 수량: <span style={{ fontSize: "1.2rem" }}>{pcs}</span>개 <br />
           <br />
           <div>
-            합계 : <span style={{ fontSize: "1.2rem" }}>{totalAmount}</span>원
+            합계: <span style={{ fontSize: "1.2rem" }}>{totalAmount}</span>원
           </div>
           <br />
           <button

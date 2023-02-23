@@ -26,9 +26,9 @@ export default function DetailPage() {
   const dispatch = useAppDispatch();
   const { id } = useParams<Params>();
   const [product, setProduct] = useState<Product[]>([]);
-  const {} = useAppSelector((store: RootState) => store.cart);
+  // const {} = useAppSelector((store: RootState) => store.cart);
   const prod_list = product;
-  const prod_idx = prod_list.findIndex((i) => i.id == id);
+  const prod_idx = prod_list.findIndex((i) => i.id === id);
   const prod = prod_list[prod_idx];
 
   new Promise((resolve, reject) => {
@@ -52,31 +52,17 @@ export default function DetailPage() {
         <div>
           <div css={Style.Container}>
             <div css={Style.InnerContainer}>
-              <img src={prod.image} height="400px" css={Style.Sizing} />
+              <img src={prod.image} height="400px" css={Style.Sizing} alt="product_image" />
               <div css={Style.DetailContainer}>
-                <br />
                 <span style={{ fontSize: "3rem", fontWeight: "bold" }}>{prod.id}</span>
-                <br />
-                <br />
                 <span style={{ fontSize: "2rem", fontWeight: "300", boxSizing: "border-box" }}>{prod.title}</span>
-                <br />
-                <br />
                 가격 : {prod.price}
-                <br />
-                <br />
-                사이즈
-                <select></select>
-                <br />
-                <br />
+                <select>사이즈</select>
                 <button css={Style.Btn} onClick={() => dispatch(addItem(prod))}>
-                  {" "}
-                  장바구니 추가 <GoPlus />{" "}
-                </button>{" "}
-                <br />
-                <br />
+                  장바구니 추가 <GoPlus />
+                </button>
                 <button css={Style.Btn}>
-                  {" "}
-                  <IoIosHeart />{" "}
+                  <IoIosHeart />
                 </button>
               </div>
             </div>

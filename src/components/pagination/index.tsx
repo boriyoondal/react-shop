@@ -9,19 +9,19 @@ import MovePagination from "src/libs/paginationFunc";
 interface Props {
   totalPage: number;
   currentPage: number;
-  setCurrentPage: any;
+  setCurrentPage: (currentPage: number) => void;
 }
-
-const PAGES_PER_LIST = 5; // page 당 표출 할 리스트 개수
 
 export default function Pagination(props: Props) {
   const navigate = useNavigate();
+  const PAGES_PER_LIST = 5; // page 당 표출 할 리스트 개수
   const { currentPage, totalPage, setCurrentPage } = props;
 
   //left arrow toggle
   const changeNumbersBackward = () => {
     setCurrentPage(currentPage - 1);
   };
+
   //right arrow toggle
   const changeNumbersForward = () => {
     setCurrentPage(currentPage + 1);
@@ -40,12 +40,12 @@ export default function Pagination(props: Props) {
             css={Style.innerContainer}
             onClick={() => {
               // currentpage Route
-              navigate(`/?pages=${i}`);
+              navigate(`?pages=${i}`);
               setCurrentPage(i);
             }}
           >
             <li
-              onClick={setCurrentPage}
+              onClick={() => setCurrentPage}
               style={{
                 color: "white",
                 backgroundColor: currentPage === i ? "#080808" : "#f0f0f0",

@@ -47,10 +47,11 @@ export default function ProductList() {
   useEffect(() => {
     setStartPage((currentPage - 1) * ITEMS_PER_PAGE);
     setTotalPage(products.length / ITEMS_PER_PAGE);
-  });
+  }, [startPage, totalPage]);
 
   //slice(시작 인덱스,종료 인덱스)
   const currentPageData = products.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
+
   return (
     <div css={Style.Container}>
       {/* 현재 페이지 데이터 slice */}
@@ -63,13 +64,12 @@ export default function ProductList() {
               navigate(`/product/${i + 1}`); // url 변경, 동적라우팅
             }}
           >
-            <img src={v.image} style={{ width: 200, height: 200, display: "inline-block" }} />
+            <img src={v.image} style={{ width: 200, height: 200, display: "inline-block" }} alt="items" />
             <h6 className="card-subtitle mb-2 text-muted">{v.id}</h6>
             <h4 className="card-title">{v.title}</h4>
             <p className="card-text">{v.price}</p>
           </div>
           <button type="button" className="btn btn-secondary" onClick={() => dispatch(addItem(v))}>
-            {" "}
             장바구니 추가 <GoPlus />
           </button>
         </div>

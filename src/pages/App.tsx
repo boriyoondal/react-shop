@@ -1,9 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
-
 // redux
 import { useAppDispatch } from "src/store/hooks";
-
 import { initCart, initPrice } from "src/store/cart/cartSlice";
 // import { initCart, initPrice } from "src/store/cart/action";
 import CheckoutPage from "src/pages/checkoutPage";

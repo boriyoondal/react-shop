@@ -15,7 +15,7 @@ import isLoginCheck from "src/libs/isLoginCheck";
 //import components
 import Footer from "src/components/templates/footer";
 import Header from "src/components/templates/header";
-import Spinner from "src/components/spinner/spinner";
+import Spinner from "src/components/spinner";
 
 export default function Login() {
   const { logInLoading, id } = useAppSelector((store: RootState) => store.login);
@@ -38,11 +38,11 @@ export default function Login() {
 
   const onSubmitForm = (e: React.FormEvent) => {
     e.preventDefault();
-    // e.stopPropagation();
     const { id, pw } = account;
     dispatch(loginRequest({ id, pw }));
     console.log(id);
   };
+
   // 로그인 체크
   useEffect(() => {
     isLoginCheck() ? navigate("/") : navigate("/login");
@@ -85,7 +85,7 @@ export default function Login() {
             autoComplete="on"
           />
           <button css={Style.LoginBtn} type="submit">
-            LOGIN
+            Login
           </button>
         </form>
       </div>
